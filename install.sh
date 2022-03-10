@@ -2,11 +2,17 @@
 
 set -eux
 
+PREFIX=~/dot-files
+
 if [ “$(uname)” == “Darwin” ]; then
     brew install go
 
     brew tap jandedobbeleer/oh-my-posh
     brew install oh-my-posh
+    brew install --cask karabiner-elements
+    mkdir -p $PREFIX/.config/karabiner
+    ln -sf $PREFIX/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
+    brew install tree
 fi
 
 git config --global user.email "dhogan@maxmind.com"
