@@ -21,6 +21,8 @@ else
     mv $FILE ~/local/bin/
 fi
 
+alias ls='ls --color=auto'
+
 git config --global user.email "dhogan@maxmind.com"
 git config --global user.name "Dallas Hogan"
 
