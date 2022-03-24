@@ -10,17 +10,21 @@ for FILE in ${FILES_TO_LINK[@]}; do
 
     FROM="$HOME/.$FILE"
     if [[ ! -L "$FROM" ]]; then
-        rm "$FROM"
+        rm -f "$FROM"
         ln -sf $PREFIX/$FILE $FROM
     fi
 
 done
 
+WEZTERM="$HOME/.config/wezterm"
+mkdir -p "$WEZTERM"
+ln -sf $PREFIX/wezterm/wezterm.lua $WEZTERM/wezterm.lua
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +'PlugInstall --sync' +qa
 vim +'PlugUpdate --sync' +qa
-exit
+
 if [ “$(uname)” == “Darwin” ]; then
     brew install go
 
