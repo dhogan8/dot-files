@@ -22,3 +22,7 @@ add_path() {
     fi
 }
 add_path "$HOME/.vim/plugged/fzf/bin"
+
+set -o vi
+
+unset PS1
