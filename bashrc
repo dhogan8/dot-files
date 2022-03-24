@@ -12,3 +12,5 @@ eval "$(oh-my-posh --init --shell bash --config https://raw.githubusercontent.co
 
 alias ls='ls --color=auto'
 
+[ -f "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash ] && . "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash
+[ -f "$HOME"/.vim/plugged/fzf/shell/completion.bash ] && . "$HOME"/.vim/plugged/fzf/shell/completion.bash
