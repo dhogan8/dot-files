@@ -4,6 +4,12 @@ set -eux
 
 PREFIX=~/dot-files
 
+FILE="$HOME/.bashrc"
+if [[ ! -L "$FILE" ]]; then
+    rm "$FILE"
+    ln -sf $PREFIX/bashrc $FILE
+fi
+
 if [ “$(uname)” == “Darwin” ]; then
     brew install go
 
