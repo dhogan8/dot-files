@@ -27,3 +27,7 @@ set -o vi
 
 unset PS1
 export PROMPT_COMMAND="_omp_hook; history -a"
+
+whosonport() {
+    sudo lsof +c 0 -i :"$1"
+}
