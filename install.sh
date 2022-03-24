@@ -4,7 +4,7 @@ set -eux
 
 PREFIX=~/dot-files
 
-FILES_TO_LINK=(bashrc vimrc)
+FILES_TO_LINK=(bashrc vimrc tmux.conf)
 
 for FILE in ${FILES_TO_LINK[@]}; do
 
@@ -34,6 +34,11 @@ if [ “$(uname)” == “Darwin” ]; then
     mkdir -p $PREFIX/.config/karabiner
     ln -sf $PREFIX/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
     brew install tree
+    brew tap homebrew/cask-fonts
+    brew install --cask font-jetbrains-mono-nerd-font
+    brew install tmux
+else
+    sudo apt install tmux
 fi
 
 alias ls='ls --color=auto'
