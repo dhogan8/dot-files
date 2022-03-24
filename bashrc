@@ -26,3 +26,4 @@ add_path "$HOME/.vim/plugged/fzf/bin"
 set -o vi
 
 unset PS1
+export PROMPT_COMMAND="_omp_hook; history -a"
