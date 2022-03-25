@@ -6,6 +6,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'fatih/vim-go'
+Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
