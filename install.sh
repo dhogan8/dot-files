@@ -46,6 +46,7 @@ alias ls='ls --color=auto'
 
 git config --global user.email "dhogan@maxmind.com"
 git config --global user.name "Dallas Hogan"
+git config --global branch.autosetuprebase always
 
 git config --global alias.b 'branch'
 git config --global alias.ca 'commit --amend'
@@ -58,4 +59,3 @@ git config --global alias.prom 'pull --rebase origin master'
 git config --global alias.pf 'push --force-with-lease'
 git config --global alias.undo 'reset --soft HEAD^'
 git config --global alias.st 'status'
-
