@@ -8,6 +8,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'fatih/vim-go'
 Plug 'preservim/nerdcommenter'
+Plug 'alvan/vim-closetag'
+Plug 'chun-yang/auto-pairs'
 
 call plug#end()
 
@@ -48,5 +50,11 @@ colorscheme nord
 let g:mapleader = ","
 nnoremap <leader>f : <C-u>FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+let g:closetag_filenames = '*.html,*.jsx,*.tsx,*.js,*.pm,*.go'
+let g:closetag_regions =  {
+\ 'typescript.tsx': 'jsxRegion,tsxRegion',
+\ 'javascript.jsx': 'jsxRegion',
+\ }
 
 set laststatus=2
