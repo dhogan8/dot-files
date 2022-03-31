@@ -51,7 +51,10 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-json',
   \ 'coc-html',
-  \ 'coc-css'
+  \ 'coc-css',
+  \ 'coc-go',
+  \ 'coc-markdownlint',
+  \ 'coc-perl',
   \ ]
 
 set number
