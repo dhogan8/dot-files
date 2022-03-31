@@ -13,7 +13,7 @@ Plug 'chun-yang/auto-pairs'
 Plug 'ap/vim-css-color'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
-
+  
 call plug#end()
 
 let g:lightline = {
@@ -64,6 +64,11 @@ syntax on
 colorscheme nord
 set updatetime=100
 
+set smartindent
+set tabstop=2
+set expandtab
+set shiftwidth=2
+	
 let g:mapleader = ","
 nnoremap <leader>f : <C-u>FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
