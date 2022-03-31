@@ -12,6 +12,7 @@ Plug 'alvan/vim-closetag'
 Plug 'chun-yang/auto-pairs'
 Plug 'ap/vim-css-color'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
