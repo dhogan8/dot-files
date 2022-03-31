@@ -11,6 +11,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'alvan/vim-closetag'
 Plug 'chun-yang/auto-pairs'
 Plug 'ap/vim-css-color'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -43,6 +44,15 @@ endfunction
 function! LightlineFilename()
     return expand('%')
 endfunction
+
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-html',
+  \ 'coc-css'
+  \ ]
 
 set number
 syntax on

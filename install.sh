@@ -40,6 +40,7 @@ if [ “$(uname)” == “Darwin” ]; then
     brew install tmux
 else
     sudo apt install tmux
+    sudo apt install python3-pyx
 fi
 
 alias ls='ls --color=auto'
