@@ -62,6 +62,7 @@ set number
 set re=0
 syntax on
 colorscheme nord
+set updatetime=100
 
 let g:mapleader = ","
 nnoremap <leader>f : <C-u>FZF<CR>
