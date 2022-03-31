@@ -58,6 +58,7 @@ let g:coc_global_extensions = [
   \ ]
 
 set number
+set re=0
 syntax on
 colorscheme nord
 
