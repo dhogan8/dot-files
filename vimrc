@@ -20,7 +20,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
       \ },
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'wombat',
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \   'modified': 'LightlineModified',
