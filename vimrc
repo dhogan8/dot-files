@@ -46,6 +46,8 @@ function! LightlineFilename()
     return expand('%')
 endfunction
 
+nnoremap <C-n> :NERDTreeToggle<CR>
+
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
