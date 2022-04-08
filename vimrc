@@ -13,7 +13,11 @@ Plug 'chun-yang/auto-pairs'
 Plug 'ap/vim-css-color'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
-  
+Plug 'dense-analysis/ale'
+Plug 'maximbaz/lightline-ale'
+Plug 'ryanpcmcquen/fix-vim-pasting' "Automatically set paste mode when inserting via insert mode
+Plug 'bronson/vim-trailing-whitespace' " highlight trailing whitespace
+
 call plug#end()
 
 let g:lightline = {
@@ -48,6 +52,51 @@ endfunction
 
 nnoremap <C-n> :NERDTreeToggle<CR>
 
+" ########### Ale ###########
+
+" statusline error display doesn't seem to work
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"\   'java': ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
+"\   'javascript': ['eslint','prettier_eslint', 'remove_trailing_lines'],
+"\   'json': ['prettier'],
+"\   'lua': ['luafmt', 'remove_trailing_lines', 'trim_whitespace'],
+"\   'markdown': ['prettier'],
+"\   'perl': ['perltidy'],
+"\   'ruby': ['rubocop'],
+"\   'rust': ['remove_trailing_newlines', 'rustfmt', 'trim_whitespace'],
+"\   'sh': ['shfmt'],
+"\   'typescript': ['prettier'],
+"\   'toml': ['prettier'],
+"\   'yaml': ['prettier'],
+\}
+" gometalinter currently not enabled
+let g:ale_linters = {
+\   'ansible' : ['ansible-lint'],
+\   'go': ['gofmt', 'golangci-lint', 'gopls'],
+\   'dockerfile': ['hadolint'],
+\   'html': ['alex', 'fecs', 'htmlhint', 'stylelint', 'tidy',],
+\   'javascript': ['eslint', 'tsserver'],
+\   'markdown': ['markdownlint', 'write-good'],
+\   'perl': ['syntax-check', 'perlcritic'],
+\   'rust': ['cargo', 'rls'],
+\   'sh': ['language_server','shell', 'shellcheck'],
+\   'typescript': ['tslint', 'tsserver'],
+\   'vim': ['vint'],
+\   'yaml': ['yamllint'],
+\}
+
+
+let g:ale_type_map = {
+\    'perlcritic': {'ES': 'WS', 'E': 'W'},
+\}
+
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
@@ -57,7 +106,7 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-go',
   \ 'coc-markdownlint',
-  \ 'coc-perl',
+  "\ 'coc-perl',
   \ ]
 
 set number
@@ -70,10 +119,13 @@ set smartindent
 set tabstop=2
 set expandtab
 set shiftwidth=2
-	
+
 let g:mapleader = ","
 nnoremap <leader>f : <C-u>FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+"remove all trailing whitespace
+:nnoremap <silent> - :FixWhitespace<CR>
 
 let g:closetag_filenames = '*.html,*.jsx,*.tsx,*.js,*.pm,*.go'
 let g:closetag_regions =  {
@@ -88,3 +140,21 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+fun HideGutter()
+    :GitGutterDisable
+    :set nonumber
+    :set nolist
+endfun
+
+fun! ShowGutter()
+    :GitGutterEnable
+    :set number
+    ":set list
+endfun
+
+autocmd BufEnter .tidyallrc       :setlocal filetype=dosini
+autocmd BufRead,BufNewFile *.html.ep  set filetype=html
+autocmd BufRead,BufNewFile *.tsx set filetype=typescript
+
+nnoremap <leader>sv :source $MYVIMRC<cr>

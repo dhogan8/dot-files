@@ -6,44 +6,46 @@ PREFIX=~/dot-files
 
 FILES_TO_LINK=(bashrc vimrc tmux.conf zshrc)
 
-for FILE in ${FILES_TO_LINK[@]}; do
+for FILE in "${FILES_TO_LINK[@]}"; do
 
-    FROM="$HOME/.$FILE"
-    if [[ ! -L "$FROM" ]]; then
-        rm -f "$FROM"
-        ln -sf $PREFIX/$FILE $FROM
-    fi
+  FROM="$HOME/.$FILE"
+  if [[ ! -L "$FROM" ]]; then
+    rm -f "$FROM"
+    ln -sf "$PREFIX/$FILE" "$FROM"
+  fi
 
 done
 
 WEZTERM="$HOME/.config/wezterm"
 mkdir -p "$WEZTERM"
-ln -sf $PREFIX/wezterm/wezterm.lua $WEZTERM/wezterm.lua
+ln -sf $PREFIX/wezterm/wezterm.lua "$WEZTERM/wezterm.lua"
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +'PlugInstall --sync' +qa
 vim +'PlugUpdate --sync' +qa
 vim +':GoUpdateBinaries' +qa
 
-if [ “$(uname)” == “Darwin” ]; then
-    brew install go
+if [ "$(uname)" == "Darwin" ]; then
+  brew install go
 
-    brew tap jandedobbeleer/oh-my-posh
-    brew install oh-my-posh
-    brew install --cask karabiner-elements
-    mkdir -p $PREFIX/.config/karabiner
-    ln -sf $PREFIX/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
-    brew install tree
-    brew tap homebrew/cask-fonts
-    brew install --cask font-jetbrains-mono-nerd-font
-    brew install tmux
+  brew tap jandedobbeleer/oh-my-posh
+  brew install oh-my-posh
+  brew install --cask karabiner-elements
+  mkdir -p $PREFIX/.config/karabiner
+  ln -sf $PREFIX/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
+  brew install tree
+  brew tap homebrew/cask-fonts
+  brew install --cask font-jetbrains-mono-nerd-font
+  brew install tmux
 else
-    sudo apt install tmux
-    sudo apt install python3-pyx
+  sudo apt install tmux
+  sudo apt install python3-pyx
 fi
 
 alias ls='ls --color=auto'
+
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
 git config --global user.email "dhogan@maxmind.com"
 git config --global user.name "Dallas Hogan"
