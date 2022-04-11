@@ -19,6 +19,7 @@ Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 Plug 'ryanpcmcquen/fix-vim-pasting' "Automatically set paste mode when inserting via insert mode
 Plug 'bronson/vim-trailing-whitespace' " highlight trailing whitespace
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
