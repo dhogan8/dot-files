@@ -1,3 +1,5 @@
+let g:ale_disable_lsp = 1
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
@@ -12,7 +14,7 @@ Plug 'alvan/vim-closetag'
 Plug 'chun-yang/auto-pairs'
 Plug 'ap/vim-css-color'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 Plug 'ryanpcmcquen/fix-vim-pasting' "Automatically set paste mode when inserting via insert mode
@@ -54,48 +56,78 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 " ########### Ale ###########
 
-" statusline error display doesn't seem to work
 let g:ale_set_quickfix = 1
 let g:ale_open_list = 1
+
+let g:lightline#ale#indicator_checking = '👀'
+let g:lightline#ale#indicator_errors = '🚨'
+let g:lightline#ale#indicator_infos = 'ℹ️'
+let g:lightline#ale#indicator_ok = '👍'
+let g:lightline#ale#indicator_warnings = '🚫'
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_ok': 'lightline#ale#ok',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
+
+let g:lightline.active = {
+      \   'right': [
+      \     [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+      \     [ 'lineinfo' ],
+      \     [ 'percent' ],
+      \     [ 'fileformat', 'fileencoding', 'filetype']
+      \   ]
+      \ }
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"\   'java': ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
-"\   'javascript': ['eslint','prettier_eslint', 'remove_trailing_lines'],
-"\   'json': ['prettier'],
-"\   'lua': ['luafmt', 'remove_trailing_lines', 'trim_whitespace'],
-"\   'markdown': ['prettier'],
-"\   'perl': ['perltidy'],
-"\   'ruby': ['rubocop'],
-"\   'rust': ['remove_trailing_newlines', 'rustfmt', 'trim_whitespace'],
-"\   'sh': ['shfmt'],
-"\   'typescript': ['prettier'],
-"\   'toml': ['prettier'],
-"\   'yaml': ['prettier'],
-\}
-" gometalinter currently not enabled
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'java': ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
+  \   'javascript': ['eslint','prettier_eslint', 'remove_trailing_lines'],
+  \   'json': ['prettier'],
+  \   'lua': ['luafmt', 'remove_trailing_lines', 'trim_whitespace'],
+  \   'markdown': ['prettier'],
+  \   'perl': ['perltidy'],
+  \   'ruby': ['rubocop'],
+  \   'rust': ['remove_trailing_newlines', 'rustfmt', 'trim_whitespace'],
+  \   'sh': ['shfmt'],
+  \   'typescript': ['prettier'],
+  \   'toml': ['prettier'],
+  \   'yaml': ['prettier'],
+  \}
+
 let g:ale_linters = {
-\   'ansible' : ['ansible-lint'],
-\   'go': ['gofmt', 'golangci-lint', 'gopls'],
-\   'dockerfile': ['hadolint'],
-\   'html': ['alex', 'fecs', 'htmlhint', 'stylelint', 'tidy',],
-\   'javascript': ['eslint', 'tsserver'],
-\   'markdown': ['markdownlint', 'write-good'],
-\   'perl': ['syntax-check', 'perlcritic'],
-\   'rust': ['cargo', 'rls'],
-\   'sh': ['language_server','shell', 'shellcheck'],
-\   'typescript': ['tslint', 'tsserver'],
-\   'vim': ['vint'],
-\   'yaml': ['yamllint'],
-\}
+  \   'ansible' : ['ansible-lint'],
+  \   'go': ['gofmt', 'golangci-lint', 'gopls'],
+  \   'dockerfile': ['hadolint'],
+  \   'html': ['alex', 'fecs', 'htmlhint', 'stylelint', 'tidy',],
+  \   'javascript': ['eslint', 'tsserver'],
+  \   'markdown': ['markdownlint', 'write-good'],
+  \   'perl': ['syntax-check', 'perlcritic'],
+  \   'rust': ['cargo', 'rls'],
+  \   'sh': ['language_server','shell', 'shellcheck'],
+  \   'typescript': ['tslint', 'tsserver'],
+  \   'vim': ['vint'],
+  \   'yaml': ['yamllint'],
+  \}
 
 
 let g:ale_type_map = {
-\    'perlcritic': {'ES': 'WS', 'E': 'W'},
-\}
+  \    'perlcritic': {'ES': 'WS', 'E': 'W'},
+  \}
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
@@ -129,9 +161,9 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
 let g:closetag_filenames = '*.html,*.jsx,*.tsx,*.js,*.pm,*.go'
 let g:closetag_regions =  {
-\ 'typescript.tsx': 'jsxRegion,tsxRegion',
-\ 'javascript.jsx': 'jsxRegion',
-\ }
+  \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+  \ 'javascript.jsx': 'jsxRegion',
+  \ }
 
 set laststatus=2
 
@@ -140,6 +172,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 
 fun HideGutter()
     :GitGutterDisable
@@ -155,6 +189,7 @@ endfun
 
 autocmd BufEnter .tidyallrc       :setlocal filetype=dosini
 autocmd BufRead,BufNewFile *.html.ep  set filetype=html
-autocmd BufRead,BufNewFile *.tsx set filetype=typescript
+autocmd BufRead,BufNewFile *.scss set filetype=css
+"autocmd BufRead,BufNewFile *.tsx set filetype=typescript
 
 nnoremap <leader>sv :source $MYVIMRC<cr>

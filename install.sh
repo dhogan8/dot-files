@@ -4,7 +4,7 @@ set -eux
 
 PREFIX=~/dot-files
 
-FILES_TO_LINK=(bashrc vimrc tmux.conf zshrc)
+FILES_TO_LINK=(bashrc vimrc tmux.conf zshrc vim/coc-settings.json inputrc)
 
 for FILE in "${FILES_TO_LINK[@]}"; do
 
