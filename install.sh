@@ -46,6 +46,7 @@ fi
 alias ls='ls --color=auto'
 
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
+pip install --upgrade vim-vint
 
 git config --global user.email "dhogan@maxmind.com"
 git config --global user.name "Dallas Hogan"
