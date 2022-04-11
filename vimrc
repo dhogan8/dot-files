@@ -58,6 +58,7 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 let g:ale_set_quickfix = 1
 let g:ale_open_list = 1
+let g:ale_list_window_size = 0
 
 let g:lightline#ale#indicator_checking = '👀'
 let g:lightline#ale#indicator_errors = '🚨'
