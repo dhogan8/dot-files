@@ -24,6 +24,8 @@ OHMYPOSH="$HOME/.config/oh-my-posh/themes"
 mkdir -p "$OHMYPOSH"
 ln -sf $PREFIX/oh-my-posh/themes/theme.omp.json "$OHMYPOSH/theme.omp.json"
 
+mkdir -p "$HOME/local/bin"
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +'PlugInstall --sync' +qa
@@ -43,6 +45,11 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install --cask font-jetbrains-mono-nerd-font
   brew install tmux
 else
+  FILE=oh-my-posh
+  cd /tmp || exit
+  curl --fail --location https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -o $FILE
+  chmod +x $FILE
+  mv $FILE ~/local/bin/
   sudo apt install tmux
   sudo apt install python3-pyx
 fi
@@ -54,11 +61,11 @@ pip install --upgrade vim-vint
 
 LOCALCHECKOUT=~/.tmux/plugins/tpm
 if [ ! -d $LOCALCHECKOUT ]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 else
-    pushd $LOCALCHECKOUT > /dev/null
-    git pull origin master
-    popd > /dev/null
+  pushd $LOCALCHECKOUT >/dev/null
+  git pull origin master
+  popd >/dev/null
 fi
 
 # tmux needs to be running in order to source a config file etc

@@ -24,6 +24,7 @@ add_path() {
 [ -f "$HOME"/dot-files/local_bashrc ] && . "$HOME"/dot-files/local_bashrc
 
 add_path "$HOME/.vim/plugged/fzf/bin"
+add_path "$HOME/local/bin"
 
 set -o vi
 
