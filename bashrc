@@ -35,6 +35,6 @@ whosonport() {
 
 # shellcheck disable=SC2046
 
-eval "$(oh-my-posh --init --shell bash --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/v$(oh-my-posh --version)/themes/jandedobbeleer.omp.json)"
+eval "$(oh-my-posh prompt init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
 
 export PROMPT_COMMAND="_omp_hook; history -a"

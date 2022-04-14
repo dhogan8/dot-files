@@ -20,6 +20,10 @@ WEZTERM="$HOME/.config/wezterm"
 mkdir -p "$WEZTERM"
 ln -sf $PREFIX/wezterm/wezterm.lua "$WEZTERM/wezterm.lua"
 
+OHMYPOSH="$HOME/.config/oh-my-posh/themes"
+mkdir -p "$OHMYPOSH"
+ln -sf $PREFIX/oh-my-posh/themes/theme.omp.json "$OHMYPOSH/theme.omp.json"
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +'PlugInstall --sync' +qa
