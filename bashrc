@@ -13,6 +13,12 @@ export YVM_DIR=/Users/dallas/.yvm
 alias ls='ls --color=auto'
 alias s='source ~/.bashrc'
 
+alias tm='tmux'
+alias tmas='tmux attach-session -t'
+alias tmks='tmux kill-session -t'
+alias tmkp='tm kill-pane'
+alias tmd='tmux detach'
+
 add_path() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="$1:$PATH"
@@ -32,6 +38,14 @@ unset PS1
 
 whosonport() {
   sudo lsof +c 0 -i :"$1"
+}
+
+rename_tab() {
+  if test "${TMUX_PANE+x}"; then
+    echo -en "\033Ptmux;\033\033]0;$1\a\033\\"
+  else
+    echo -en "\033]0;$1\a"
+  fi
 }
 
 # shellcheck disable=SC2046
