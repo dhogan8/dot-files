@@ -4,7 +4,7 @@ set -eux
 
 PREFIX=~/dot-files
 
-FILES_TO_LINK=(bashrc vimrc tmux.conf zshrc vim/coc-settings.json inputrc)
+FILES_TO_LINK=(bashrc vimrc tmux.conf zshrc vim/coc-settings.json inputrc profile)
 
 for FILE in "${FILES_TO_LINK[@]}"; do
 
@@ -44,6 +44,8 @@ if [ "$(uname)" == "Darwin" ]; then
   brew tap homebrew/cask-fonts
   brew install --cask font-jetbrains-mono-nerd-font
   brew install tmux
+  brew install bash
+  brew install bash-completion
 else
   FILE=oh-my-posh
   cd /tmp || exit
