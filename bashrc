@@ -21,10 +21,12 @@ alias ls='ls --color=auto'
 alias s='source ~/.bashrc'
 
 alias tm='tmux'
+alias tmls='tmux ls'
 alias tmas='tmux attach-session -t'
 alias tmks='tmux kill-session -t'
 alias tmkp='tm kill-pane'
 alias tmd='tmux detach'
+alias tmns='tmux new -s'
 
 add_path() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then

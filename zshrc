@@ -20,10 +20,12 @@ eval "$(oh-my-posh prompt init zsh --config ~/.config/oh-my-posh/themes/theme.om
 alias ls='ls --color=auto'
 
 alias tm='tmux'
+alias tmls='tmux ls'
 alias tmas='tmux attach-session -t'
 alias tmks='tmux kill-session -t'
 alias tmkp='tm kill-pane'
 alias tmd='tmux detach'
+alias tmns='tmux new -s'
 
 rename_tab() {
   if test "${TMUX_PANE+x}"; then
