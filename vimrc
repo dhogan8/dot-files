@@ -196,3 +196,9 @@ autocmd BufRead,BufNewFile *.scss set filetype=css
 "autocmd BufRead,BufNewFile *.tsx set filetype=typescript
 
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Split management
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>s :split<CR>
+nnoremap <leader>w <C-w>w
+nnoremap <leader><leader> <c-^>
