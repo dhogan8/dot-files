@@ -20,6 +20,10 @@ WEZTERM="$HOME/.config/wezterm"
 mkdir -p "$WEZTERM"
 ln -sf $PREFIX/wezterm/wezterm.lua "$WEZTERM/wezterm.lua"
 
+HAMMERSPOON="$HOME/.hammerspoon"
+mkdir -p "$HAMMERSPOON"
+ln -sf $PREFIX/hammerspoon/init.lua "$HAMMERSPOON/init.lua"
+
 OHMYPOSH="$HOME/.config/oh-my-posh/themes"
 mkdir -p "$OHMYPOSH"
 ln -sf $PREFIX/oh-my-posh/themes/theme.omp.json "$OHMYPOSH/theme.omp.json"
