@@ -192,7 +192,7 @@ endfun
 
 autocmd BufEnter .tidyallrc       :setlocal filetype=dosini
 autocmd BufRead,BufNewFile *.html.ep  set filetype=html
-autocmd BufRead,BufNewFile *.scss set filetype=css
+autocmd BufRead,BufNewFile *.scss set filetype=scss
 "autocmd BufRead,BufNewFile *.tsx set filetype=typescript
 
 nnoremap <leader>sv :source $MYVIMRC<cr>
