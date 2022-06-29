@@ -21,6 +21,7 @@ Plug 'ryanpcmcquen/fix-vim-pasting' "Automatically set paste mode when inserting
 Plug 'bronson/vim-trailing-whitespace' " highlight trailing whitespace
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/matchtag' "Highlights matching tags
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
@@ -132,6 +133,8 @@ let g:ale_type_map = {
   \    'perlcritic': {'ES': 'WS', 'E': 'W'},
   \}
 
+" ########### COC ###########
+
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
@@ -141,9 +144,21 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-go',
   \ 'coc-markdownlint',
-  "\ 'coc-perl',
   \ ]
 
+" ########### JSX ###########
+let g:jsx_ext_required = 1
+
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-go',
+  \ 'coc-markdownlint',
+  \ ]
 set number
 set re=0
 syntax on
