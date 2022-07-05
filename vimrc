@@ -210,6 +210,9 @@ autocmd BufRead,BufNewFile *.html.ep  set filetype=html
 autocmd BufRead,BufNewFile *.scss set filetype=scss
 "autocmd BufRead,BufNewFile *.tsx set filetype=typescript
 
+"dictionary sort unique
+:vnoremap <silent> su :!sort -d --ignore-case<bar> uniq<CR>
+
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Split management
