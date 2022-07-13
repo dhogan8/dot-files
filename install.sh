@@ -47,6 +47,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install tree
   brew tap homebrew/cask-fonts
   brew install --cask font-jetbrains-mono-nerd-font
+  brew install font-jetbrains-mono-nerd-font
   brew install tmux
   brew install bash
   brew install bash-completion
