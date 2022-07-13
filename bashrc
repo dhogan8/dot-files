@@ -28,6 +28,18 @@ alias tmkp='tm kill-pane'
 alias tmd='tmux detach'
 alias tmns='tmux new -s'
 
+git config --global alias.b 'branch'
+git config --global alias.ca 'commit --amend'
+git config --global alias.can 'commit --amend --no-edit'
+git config --global alias.ct 'commit'
+git config --global alias.co 'checkout'
+git config --global alias.dc 'diff --cached'
+git config --global alias.doms 'diff -w -M origin/main...HEAD --stat --name-only'
+git config --global alias.prom 'pull --rebase origin master'
+git config --global alias.pf 'push --force-with-lease'
+git config --global alias.undo 'reset --soft HEAD^'
+git config --global alias.st 'status'
+
 add_path() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="$1:$PATH"
