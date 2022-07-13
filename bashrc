@@ -35,10 +35,11 @@ git config --global alias.ct 'commit'
 git config --global alias.co 'checkout'
 git config --global alias.dc 'diff --cached'
 git config --global alias.doms 'diff -w -M origin/main...HEAD --stat --name-only'
-git config --global alias.prom 'pull --rebase origin master'
+git config --global alias.prom 'pull --rebase origin main'
 git config --global alias.pf 'push --force-with-lease'
 git config --global alias.undo 'reset --soft HEAD^'
 git config --global alias.st 'status'
+git config --global alias.gra 'rebase -i --autosquash'
 
 add_path() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
