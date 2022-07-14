@@ -64,7 +64,7 @@ fi
 alias ls='ls --color=auto'
 
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
-pip install --upgrade vim-vint
+pip3 install --upgrade vim-vint
 
 LOCALCHECKOUT=~/.tmux/plugins/tpm
 if [ ! -d $LOCALCHECKOUT ]; then
