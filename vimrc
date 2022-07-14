@@ -208,7 +208,7 @@ endfun
 autocmd BufEnter .tidyallrc       :setlocal filetype=dosini
 autocmd BufRead,BufNewFile *.html.ep  set filetype=html
 autocmd BufRead,BufNewFile *.scss set filetype=scss
-"autocmd BufRead,BufNewFile *.tsx set filetype=typescript
+autocmd BufRead,BufNewFile bash_profile set filetype=sh
 
 "dictionary sort unique
 :vnoremap <silent> su :!sort -d --ignore-case<bar> uniq<CR>
