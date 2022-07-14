@@ -88,5 +88,3 @@ tmux source ~/.tmux.conf
 
 tmux kill-session -t CI
 
-git config --global user.name "Dallas Hogan"
-git config --global branch.autosetuprebase always
