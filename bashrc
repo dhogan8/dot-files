@@ -28,6 +28,9 @@ alias tmkp='tm kill-pane'
 alias tmd='tmux detach'
 alias tmns='tmux new -s'
 
+git config --global user.name 'Dallas Hogan'
+git config --global user.email 'dallastar4@gmail.com'
+
 git config --global alias.b 'branch'
 git config --global alias.ca 'commit --amend'
 git config --global alias.can 'commit --amend --no-edit'
