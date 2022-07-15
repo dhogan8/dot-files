@@ -22,12 +22,6 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(oh-my-posh prompt init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/google-cloud-sdk/path.bash.inc' ]; then . '~/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '~/google-cloud-sdk/completion.bash.inc' ]; then . '~/google-cloud-sdk/completion.bash.inc'; fi
-
 alias ls='ls --color=auto'
 alias s='source ~/.bashrc'
 
@@ -40,3 +34,9 @@ alias tmd='tmux detach'
 alias tmns='tmux new -s'
 
 export PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/dallas/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dallas/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/dallas/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/dallas/google-cloud-sdk/completion.bash.inc'; fi
