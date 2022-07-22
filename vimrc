@@ -197,12 +197,14 @@ fun HideGutter()
     :GitGutterDisable
     :set nonumber
     :set nolist
+    :set scl=no " sign column
 endfun
 
 fun! ShowGutter()
     :GitGutterEnable
     :set number
-    ":set list
+    :set list
+    :set scl=auto
 endfun
 
 autocmd BufEnter .tidyallrc       :setlocal filetype=dosini
