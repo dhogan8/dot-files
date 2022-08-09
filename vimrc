@@ -18,10 +18,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 Plug 'ryanpcmcquen/fix-vim-pasting' "Automatically set paste mode when inserting via insert mode
-Plug 'bronson/vim-trailing-whitespace' " highlight trailing whitespace
+Plug 'bronson/vim-trailing-whitespace' "Highlight trailing whitespace
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/matchtag' "Highlights matching tags
 Plug 'mxw/vim-jsx'
+Plug 'ervandew/supertab' "Tab completion
 
 call plug#end()
 
@@ -146,9 +147,6 @@ let g:coc_global_extensions = [
   \ 'coc-markdownlint',
   \ ]
 
-" ########### JSX ###########
-let g:jsx_ext_required = 1
-
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
@@ -159,6 +157,9 @@ let g:coc_global_extensions = [
   \ 'coc-go',
   \ 'coc-markdownlint',
   \ ]
+
+let g:jsx_ext_required = 1
+
 set number
 set re=0
 syntax on
@@ -170,7 +171,7 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 
-let g:mapleader = ","
+let g:mapleader = ','
 nnoremap <leader>f : <C-u>FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
