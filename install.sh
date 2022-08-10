@@ -38,8 +38,7 @@ vim +':GoUpdateBinaries' +qa
 
 if [ "$(uname)" == "Darwin" ]; then
   brew install go
-
-  brew tap jandedobbeleer/oh-my-posh
+  brew install jandedobbeleer/oh-my-posh/oh-my-posh
   brew install oh-my-posh
   brew install --cask karabiner-elements
   mkdir -p $PREFIX/.config/karabiner
