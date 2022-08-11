@@ -37,6 +37,7 @@ vim +'PlugUpdate --sync' +qa
 vim +':GoUpdateBinaries' +qa
 
 if [ "$(uname)" == "Darwin" ]; then
+  brew upgrade
   brew install go
   brew install jandedobbeleer/oh-my-posh/oh-my-posh
   brew install oh-my-posh
