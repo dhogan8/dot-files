@@ -1,5 +1,13 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+# Bash completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# Git completion
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
@@ -40,11 +48,3 @@ if [ -f '/Users/dallas/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dallas/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/dallas/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/dallas/google-cloud-sdk/completion.bash.inc'; fi
-
-# Bash completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-
-# Git completion
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-fi

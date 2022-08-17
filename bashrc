@@ -10,11 +10,12 @@ add_path() {
 	fi
 }
 
+add_path "$HOME/.vim/plugged/fzf/bin"
+
 [ -f "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash ] && . "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash
 [ -f "$HOME"/.vim/plugged/fzf/shell/completion.bash ] && . "$HOME"/.vim/plugged/fzf/shell/completion.bash
 [ -f "$HOME"/dot-files/local_bashrc ] && . "$HOME"/dot-files/local_bashrc
 
-add_path "$HOME/.vim/plugged/fzf/bin"
 add_path "$HOME/local/bin"
 
 # The next line updates PATH for the Google Cloud SDK.
