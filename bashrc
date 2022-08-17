@@ -5,9 +5,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export EDITOR=vim
 
 add_path() {
-  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-    PATH="$1:$PATH"
-  fi
+	if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+		PATH="$1:$PATH"
+	fi
 }
 
 [ -f "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash ] && . "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash
@@ -28,15 +28,52 @@ set -o vi
 unset PS1
 
 whosonport() {
-  sudo lsof +c 0 -i :"$1"
+	sudo lsof +c 0 -i :"$1"
 }
 
 rename_tab() {
-  if test "${TMUX_PANE+x}"; then
-    echo -en "\033Ptmux;\033\033]0;$1\a\033\\"
-  else
-    echo -en "\033]0;$1\a"
-  fi
+	if test "${TMUX_PANE+x}"; then
+		echo -en "\033Ptmux;\033\033]0;$1\a\033\\"
+	else
+		echo -en "\033]0;$1\a"
+	fi
+}
+
+# https://raim.codingfarm.de/blog/2013/01/30/tmux-update-environment/
+tmux() {
+	#set -eux
+	local tmux=$(type -fp tmux)
+
+	if [ $# -ge 1 ] && [ -n "$1" ]; then
+		case "$1" in
+		update-environment | update-env | ue)
+			local v
+			while read v; do
+				if [[ $v == -* ]]; then
+					echo "unset $v"
+					unset ${v/#-/}
+				else
+					# Add quotes around the argument
+					v=${v/=/=\"}
+					v=${v/%/\"}
+					echo "export $v"
+					eval export "$v"
+				fi
+			done < <(tmux show-environment)
+			;;
+		# https://gist.github.com/marczych/10524654
+		ns)
+			tmux_session_name
+			tmux rename-session "$SESSION_NAME"
+			;;
+		*)
+			$tmux "$@"
+			;;
+		esac
+	else
+		tmux_session_name
+		$tmux new -s "$SESSION_NAME"
+	fi
 }
 
 # shellcheck disable=SC2046
