@@ -23,6 +23,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/matchtag' "Highlights matching tags
 Plug 'mxw/vim-jsx'
 Plug 'ervandew/supertab' "Tab completion
+Plug 'mustache/vim-mustache-handlebars' "Handlebars syntax highlighting
+
 
 call plug#end()
 
@@ -174,6 +176,9 @@ set shiftwidth=2
 let g:mapleader = ','
 nnoremap <leader>f : <C-u>FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+" vim-mustache-handlebars
+let g:mustache_abbreviations = 1
 
 "remove all trailing whitespace
 :nnoremap <silent> - :FixWhitespace<CR>
