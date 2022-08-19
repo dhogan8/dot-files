@@ -208,7 +208,10 @@ fun! ShowGutter()
     :set scl=auto
 endfun
 
-autocmd BufEnter .tidyallrc       :setlocal filetype=dosini
+" Prevent vim swap files from being included with important files
+set directory="$HOME"/.vimtmp
+
+autocmd BufEnter .tidyallrc               :setlocal filetype=dosini
 
 autocmd BufRead,BufNewFile *.html.ep      set filetype=html
 autocmd BufRead,BufNewFile *.scss         set filetype=scss

@@ -30,6 +30,8 @@ ln -sf $PREFIX/oh-my-posh/themes/theme.omp.json "$OHMYPOSH/theme.omp.json"
 
 mkdir -p "$HOME/local/bin"
 
+mkdir -p "$HOME/.vimtmp"
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +'PlugInstall --sync' +qa
