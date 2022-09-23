@@ -151,17 +151,6 @@ let g:coc_global_extensions = [
   \ 'coc-markdownlint',
   \ ]
 
-let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-json',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-go',
-  \ 'coc-markdownlint',
-  \ ]
-
 let g:jsx_ext_required = 1
 
 set number
