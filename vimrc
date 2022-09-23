@@ -102,16 +102,18 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \   'java': ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
-  \   'javascript': ['eslint','prettier_eslint', 'remove_trailing_lines'],
+  \   'java': ['google_java_format'],
+  \   'javascript': ['eslint', 'prettier_eslint'],
+  \   'javascriptreact': ['eslint', 'prettier'],
   \   'json': ['prettier'],
-  \   'lua': ['luafmt', 'remove_trailing_lines', 'trim_whitespace'],
+  \   'lua': ['luafmt'],
   \   'markdown': ['prettier'],
   \   'perl': ['perltidy'],
   \   'ruby': ['rubocop'],
-  \   'rust': ['remove_trailing_newlines', 'rustfmt', 'trim_whitespace'],
+  \   'rust': ['rustfmt'],
   \   'sh': ['shfmt'],
   \   'typescript': ['prettier'],
+  \   'typescriptreact': ['eslint', 'prettier'],
   \   'toml': ['prettier'],
   \   'yaml': ['prettier'],
   \}
