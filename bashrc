@@ -1,14 +1,36 @@
 # shellcheck disable=SC1090
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export BASH_SILENCE_DEPRECATION_WARNING=1
-export PATH="$PATH:$HOME/.rvm/bin"
-export EDITOR=vim
 
 add_path() {
 	if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
 		PATH="$1:$PATH"
 	fi
 }
+
+echo_path() {
+    echo "path..."
+    tr : '\n' <<<"$PATH"
+}
+
+remove_path() {
+    PATH=$(tr : '\n' <<<"$PATH" | grep -v "^$1$" | paste -sd ':' -)
+    export PATH
+}
+
+clean_path() {
+    # shellcheck disable=SC1001
+    tr : '\n' <<<"$PATH" | awk '!x[$0]++' | grep \/ | grep -v game | paste -sd ":" -
+}
+
+reset_path() {
+    PATH=$(clean_path)
+    export PATH
+}
+
+add_path "/usr/local/opt/perl/bin"
+add_path "$HOME/.rvm/bin"
+export EDITOR=vim
 
 add_path "$HOME/.vim/plugged/fzf/bin"
 
