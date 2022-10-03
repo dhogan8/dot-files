@@ -53,6 +53,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install tmux
   brew install bash
   brew install bash-completion
+  brew install cpm
 else
   FILE=oh-my-posh
   cd /tmp || exit
