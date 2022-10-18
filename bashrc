@@ -28,7 +28,12 @@ reset_path() {
     export PATH
 }
 
-add_path "/usr/local/opt/perl/bin"
+alias updatedb="sudo /usr/libexec/locate.updatedb"
+
+remove_path "/usr/local/opt/perl/bin"
+add_path "$HOME/.plenv/bin"
+if which plenv >/dev/null; then eval "$(plenv init -)"; fi
+
 add_path "$HOME/.rvm/bin"
 export EDITOR=vim
 
