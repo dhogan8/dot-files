@@ -51,4 +51,6 @@ if [ -f '/Users/dallas/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/d
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 # Set PATH, MANPATH, etc., for Homebrew.
-#eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ "$(uname)" == "Darwin" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
