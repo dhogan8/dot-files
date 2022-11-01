@@ -31,7 +31,7 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(oh-my-posh prompt init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
 
 alias ls='ls --color=auto'
-alias s='source ~/.bashrc'
+alias s='source ~/.bashrc && source ~/.bash_profile'
 
 alias tm='tmux'
 alias tmls='tmux ls'
