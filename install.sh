@@ -42,7 +42,6 @@ if [ "$(uname)" == "Darwin" ]; then
   brew upgrade
   brew install go
   brew install jandedobbeleer/oh-my-posh/oh-my-posh
-  brew install oh-my-posh
   brew install --cask karabiner-elements
   mkdir -p $PREFIX/.config/karabiner
   ln -sf $PREFIX/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
