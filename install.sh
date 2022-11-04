@@ -52,6 +52,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install bash
   brew install bash-completion
   brew install cpm
+  brew install openssl
 else
   FILE=oh-my-posh
   cd /tmp || exit

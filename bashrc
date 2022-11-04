@@ -106,6 +106,6 @@ tmux() {
 
 # shellcheck disable=SC2046
 
-export OPENSSL_PREFIX="/opt/homebrew/opt/openssl@1.1/include/openssl"
+unset OPENSSL_PREFIX
 export PROMPT_COMMAND="_omp_hook; history -a"
 export PATH
