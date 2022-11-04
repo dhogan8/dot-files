@@ -118,14 +118,6 @@ Install:andUse("BingDaily")
 Install:andUse("CircleClock")
 Install:andUse("LookupSelection", {hotkeys = {lexicon = {hyper, "d"}}})
 Install:andUse(
-    "MicMute",
-    {
-        hotkeys = {
-            toggle = {hyper, "m"}
-        }
-    }
-)
-Install:andUse(
     "Seal",
     {
         hotkeys = {show = {hyper, "space"}},
