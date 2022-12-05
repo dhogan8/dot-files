@@ -44,6 +44,9 @@ alias tmkp='tm kill-pane'
 alias tmd='tmux detach'
 alias tmns='tmux new -s'
 
+gcp_ssh_username=dhogan_maxmind_com
+export gcp_ssh_username
+
 export PATH
 
 # The next line updates PATH for the Google Cloud SDK.
