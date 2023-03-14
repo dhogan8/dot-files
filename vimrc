@@ -102,13 +102,14 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'go': ['gofumpt'],
   \   'java': ['google_java_format'],
   \   'javascript': ['eslint', 'prettier_eslint'],
   \   'javascriptreact': ['eslint', 'prettier'],
   \   'json': ['prettier'],
   \   'lua': ['luafmt'],
   \   'markdown': ['prettier'],
-  \   'perl': ['perltidy'],
+  \   'perl': ['perltidy', 'perlimports'],
   \   'ruby': ['rubocop'],
   \   'rust': ['rustfmt'],
   \   'sh': ['shfmt'],
@@ -120,12 +121,12 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
   \   'ansible' : ['ansible-lint'],
-  \   'go': ['gofmt', 'golangci-lint', 'gopls'],
+  \   'go': ['gofmt', 'golangci-lint', 'gopls', 'revive'],
   \   'dockerfile': ['hadolint'],
   \   'html': ['alex', 'fecs', 'htmlhint', 'stylelint', 'tidy',],
   \   'javascript': ['eslint', 'tsserver'],
   \   'markdown': ['markdownlint', 'write-good'],
-  \   'perl': ['syntax-check', 'perlcritic'],
+  \   'perl': ['syntax-check', 'perlcritic', 'perlimports'],
   \   'rust': ['cargo', 'rls'],
   \   'sh': ['language_server','shell', 'shellcheck'],
   \   'typescript': ['tslint', 'tsserver'],
