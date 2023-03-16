@@ -214,6 +214,7 @@ autocmd BufRead,BufNewFile *.html.ep      set filetype=html
 autocmd BufRead,BufNewFile *.scss         set filetype=scss
 autocmd BufRead,BufNewFile bash_profile   set filetype=sh
 autocmd BufRead,BufNewFile *.tx           set filetype=html
+autocmd BufRead,BufNewFile *.gohtml      set filetype=html
 
 "dictionary sort unique
 :vnoremap <silent> su :!sort -d --ignore-case<bar> uniq<CR>
