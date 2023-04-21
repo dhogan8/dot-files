@@ -53,6 +53,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install bash-completion
   brew install cpm
   brew install openssl
+  brew install hashicorp/tap/hashicorp-vagrant
 else
   FILE=oh-my-posh
   cd /tmp || exit
