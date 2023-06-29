@@ -24,6 +24,7 @@ Plug 'gregsexton/matchtag' "Highlights matching tags
 Plug 'mxw/vim-jsx'
 Plug 'ervandew/supertab' "Tab completion
 Plug 'mustache/vim-mustache-handlebars' "Handlebars syntax highlighting
+Plug 'bkad/CamelCaseMotion' "Tab camelcase words
 
 
 call plug#end()
@@ -204,6 +205,16 @@ fun! ShowGutter()
     :set list
     :set scl=auto
 endfun
+
+" CamelCaseMotion
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
 
 " Prevent vim swap files from being included with important files
 set directory="$HOME"/.vimtmp
