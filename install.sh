@@ -32,6 +32,9 @@ mkdir -p "$HOME/local/bin"
 
 mkdir -p "$HOME/.vimtmp"
 
+nvim_conf_dir="$HOME/.config/nvim"
+ln -sf $PREFIX/nvim "$nvim_conf_dir"
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +'PlugInstall --sync' +qa

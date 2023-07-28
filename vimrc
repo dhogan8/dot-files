@@ -1,3 +1,4 @@
+scriptencoding utf-8
 let g:ale_disable_lsp = 1
 
 call plug#begin('~/.vim/plugged')
@@ -13,7 +14,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'alvan/vim-closetag'
 Plug 'chun-yang/auto-pairs'
 Plug 'ap/vim-css-color'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
@@ -25,7 +25,40 @@ Plug 'mxw/vim-jsx'
 Plug 'ervandew/supertab' "Tab completion
 Plug 'mustache/vim-mustache-handlebars' "Handlebars syntax highlighting
 Plug 'bkad/CamelCaseMotion' "Tab camelcase words
+Plug 'haya14busa/vim-auto-mkdir' " Makes directories
 
+if has('nvim')
+  Plug 'ellisonleao/glow.nvim'
+    " nvim-cmp
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'lvimuser/lsp-inlayhints.nvim'
+  Plug 'onsails/lspkind.nvim'
+  Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.*', 'do': 'make install_jsregexp'}
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate'}  "We recommend updating the parsers on update
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'jose-elias-alvarez/null-ls.nvim'
+  Plug 'lukas-reineke/lsp-format.nvim'
+  Plug 'akinsho/bufferline.nvim'
+  Plug 'kyazdani42/nvim-web-devicons' "Recommended (for coloured icons for bufferline.nvim)
+  Plug 'SmiteshP/nvim-navic'
+  Plug 'SmiteshP/nvim-navbuddy'
+  Plug 'MunifTanjim/nui.nvim'
+  Plug 'folke/noice.nvim'
+  Plug 'MunifTanjim/nui.nvim'
+  Plug 'rcarriga/nvim-notify'
+  Plug 'folke/trouble.nvim'
+endif
 
 call plug#end()
 
@@ -131,7 +164,6 @@ let g:ale_linters = {
   \   'rust': ['cargo', 'rls'],
   \   'sh': ['language_server','shell', 'shellcheck'],
   \   'typescript': ['tslint', 'tsserver'],
-  \   'vim': ['vint'],
   \   'yaml': ['yamllint'],
   \}
 
@@ -140,23 +172,10 @@ let g:ale_type_map = {
   \    'perlcritic': {'ES': 'WS', 'E': 'W'},
   \}
 
-" ########### COC ###########
-
-let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-json',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-go',
-  \ 'coc-markdownlint',
-  \ ]
-
 let g:jsx_ext_required = 1
 
 set number
-set re=0
+set regexpengine=0
 syntax on
 colorscheme nord
 set updatetime=100
@@ -183,14 +202,6 @@ let g:closetag_regions =  {
   \ }
 
 set laststatus=2
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
-nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 
 fun HideGutter()
     :GitGutterDisable
@@ -219,13 +230,14 @@ sunmap ge
 " Prevent vim swap files from being included with important files
 set directory="$HOME"/.vimtmp
 
-autocmd BufEnter .tidyallrc               :setlocal filetype=dosini
-
-autocmd BufRead,BufNewFile *.html.ep      set filetype=html
-autocmd BufRead,BufNewFile *.scss         set filetype=scss
-autocmd BufRead,BufNewFile bash_profile   set filetype=sh
-autocmd BufRead,BufNewFile *.tx           set filetype=html
-autocmd BufRead,BufNewFile *.gohtml      set filetype=html
+augroup filetypes
+  autocmd BufEnter .tidyallrc               :setlocal filetype=dosini
+  autocmd BufRead,BufNewFile *.html.ep      set filetype=html
+  autocmd BufRead,BufNewFile *.scss         set filetype=scss
+  autocmd BufRead,BufNewFile bash_profile   set filetype=sh
+  autocmd BufRead,BufNewFile *.tx           set filetype=html
+  autocmd BufRead,BufNewFile *.gohtml      set filetype=html
+augroup END
 
 "dictionary sort unique
 :vnoremap <silent> su :!sort -d --ignore-case<bar> uniq<CR>
