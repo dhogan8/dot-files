@@ -345,4 +345,4 @@ null_ls.setup({
 
 require('glow').setup()
 
-require('trouble').setup()
+--require('trouble').setup()

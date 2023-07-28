@@ -57,7 +57,7 @@ if has('nvim')
   Plug 'folke/noice.nvim'
   Plug 'MunifTanjim/nui.nvim'
   Plug 'rcarriga/nvim-notify'
-  Plug 'folke/trouble.nvim'
+  "Plug 'folke/trouble.nvim'
 endif
 
 call plug#end()
