@@ -58,3 +58,7 @@ if [ -f '/Users/dallas/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/d
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
+
+# MM aliases
+alias template='./dev/bin/web/generate-go-default-layout.sh -g'
+alias submit='./dev/bin/general/submit-work.pl'
