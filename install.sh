@@ -54,6 +54,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install cpm
   brew install openssl
   brew install hashicorp/tap/hashicorp-vagrant
+  brew install neovim
 else
   FILE=oh-my-posh
   cd /tmp || exit
@@ -62,6 +63,7 @@ else
   mv $FILE ~/local/bin/
   sudo apt install tmux
   sudo apt install python3-pyx
+  sudo apt install neovim
 fi
 
 alias ls='ls --color=auto'
