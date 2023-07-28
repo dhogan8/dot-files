@@ -41,6 +41,7 @@ alias tmks='tmux kill-session -t'
 alias tmkp='tm kill-pane'
 alias tmd='tmux detach'
 alias tmns='tmux new -s'
+alias nv='nvim'
 
 gcp_ssh_username=dhogan_maxmind_com
 export gcp_ssh_username
