@@ -33,7 +33,14 @@ mkdir -p "$HOME/local/bin"
 mkdir -p "$HOME/.vimtmp"
 
 nvim_conf_dir="$HOME/.config/nvim"
-ln -sf $PREFIX/nvim "$nvim_conf_dir"
+# Simplify after deployed to all environments
+if [[ -d $nvim_conf_dir && ! -L $nvim_conf_dir ]]; then
+  unlink "$nvim_conf_dir/init.vim"
+  rmdir "$nvim_conf_dir"
+elif [[ ! -L $nvim_conf_dir ]]; then
+  echo "$nvim_conf_dir should create symlink"
+  ln -sf $PREFIX/nvim "$nvim_conf_dir"
+fi
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -57,7 +64,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install cpm
   brew install openssl
   brew install hashicorp/tap/hashicorp-vagrant
-  brew install neovim
+  brew install --head neovim
 else
   FILE=oh-my-posh
   cd /tmp || exit
