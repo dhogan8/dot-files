@@ -345,4 +345,23 @@ null_ls.setup({
 
 require('glow').setup()
 
---require('trouble').setup()
+--require('hlchunk').setup({
+    --indent = {
+        --chars = { "│", "¦", "┆", "┊", }, -- more code can be found in https://unicodeplus.com/
+        --style = { "#F1f1f1" },
+    --},
+    --blank = {
+        --enable = false,
+    --},
+    --chunk = {
+      --chars = {
+          --horizontal_line = "─",
+          --vertical_line = "│",
+          --left_top = "┌",
+          --left_bottom = "└",
+          --right_arrow = "─",
+      --},
+      --use_treesitter = true,
+    --style = "#00ffff",
+    --},
+--})

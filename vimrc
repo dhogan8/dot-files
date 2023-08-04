@@ -29,7 +29,6 @@ Plug 'haya14busa/vim-auto-mkdir' " Makes directories
 
 if has('nvim')
   Plug 'ellisonleao/glow.nvim'
-    " nvim-cmp
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
@@ -57,7 +56,7 @@ if has('nvim')
   Plug 'folke/noice.nvim'
   Plug 'MunifTanjim/nui.nvim'
   Plug 'rcarriga/nvim-notify'
-  "Plug 'folke/trouble.nvim'
+  Plug 'shellRaining/hlchunk.nvim' "Highlight indent
 endif
 
 call plug#end()
