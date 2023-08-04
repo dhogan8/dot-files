@@ -57,6 +57,7 @@ if has('nvim')
   Plug 'MunifTanjim/nui.nvim'
   Plug 'rcarriga/nvim-notify'
   Plug 'shellRaining/hlchunk.nvim' "Highlight indent
+  Plug 'folke/trouble.nvim'
 endif
 
 call plug#end()
@@ -249,3 +250,11 @@ nnoremap <leader>s :split<CR>
 nnoremap <leader>w <C-w>w
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>b :Buffers<CR>
+
+" Trouble
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>

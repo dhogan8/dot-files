@@ -370,6 +370,8 @@ null_ls.setup({
 
 require('glow').setup()
 
+require('trouble').setup()
+
 --require('hlchunk').setup({
     --indent = {
         --chars = { "│", "¦", "┆", "┊", }, -- more code can be found in https://unicodeplus.com/
