@@ -307,6 +307,31 @@ require('lspconfig').pylsp.setup {
     }
 }
 
+require('lspconfig').lua_ls.setup {
+  on_attach = function()
+    on_attach()
+    vim.cmd [[autocmd BufWritePre <buffer> lua require'stylua-nvim'.format_file()]]
+  end,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+        path = runtime_path,
+      },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+
 wildchar = "<tab>"
 -- require("lspconfig").rust_analyzer.setup {}
 
