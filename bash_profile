@@ -43,6 +43,10 @@ alias tmd='tmux detach'
 alias tmns='tmux new -s'
 alias nv='nvim'
 
+ptest() (
+  npx playwright test "$1" --headed --project=chromium
+)
+
 gcp_ssh_username=dhogan_maxmind_com
 export gcp_ssh_username
 
