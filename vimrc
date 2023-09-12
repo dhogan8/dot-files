@@ -137,6 +137,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'go': ['gofumpt'],
+  \   'gohtml': ['prettier'],
   \   'java': ['google_java_format'],
   \   'javascript': ['eslint', 'prettier_eslint'],
   \   'javascriptreact': ['eslint', 'prettier'],
@@ -156,6 +157,7 @@ let g:ale_fixers = {
 let g:ale_linters = {
   \   'ansible' : ['ansible-lint'],
   \   'go': ['gofmt', 'golangci-lint', 'gopls', 'revive'],
+  \   'gohtml': ['prettier'],
   \   'dockerfile': ['hadolint'],
   \   'html': ['alex', 'fecs', 'htmlhint', 'stylelint', 'tidy',],
   \   'javascript': ['eslint', 'tsserver'],
