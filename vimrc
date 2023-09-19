@@ -54,7 +54,6 @@ if has('nvim')
   Plug 'SmiteshP/nvim-navbuddy'
   Plug 'MunifTanjim/nui.nvim'
   Plug 'folke/noice.nvim'
-  Plug 'MunifTanjim/nui.nvim'
   Plug 'rcarriga/nvim-notify'
   Plug 'shellRaining/hlchunk.nvim' "Highlight indent
   Plug 'folke/trouble.nvim'
