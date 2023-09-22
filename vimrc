@@ -250,7 +250,7 @@ nnoremap <leader><leader> :nohlsearch<cr>
 nnoremap <leader>v :vsplit<CR>
 nnoremap <leader>s :split<CR>
 nnoremap <leader>w <C-w>w
-"nnoremap <leader><leader> <c-^>
+nnoremap <leader>. <c-^>
 nnoremap <leader>b :Buffers<CR>
 
 " Trouble
