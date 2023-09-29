@@ -68,3 +68,4 @@ fi
 alias template='./dev/bin/web/generate-go-default-layout.sh -g'
 alias submit='./dev/bin/general/submit-work.sh'
 alias dw='dev/bin/web/dev-website'
+alias prove-this='dev/bin/test/prove-this'
