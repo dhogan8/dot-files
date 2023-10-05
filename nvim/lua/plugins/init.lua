@@ -350,15 +350,8 @@ require("noice").setup({
             view = 'mini',
         },
     },
-    routes = {
-      {
-        filter = {
-          event = "msg_show",
-          kind = "",
-          find = "written",
-        },
-        opts = { skip = true },
-      },
+    messages = {
+      enabled = false,
     },
     -- you can enable a preset for easier configuration
     presets = {
