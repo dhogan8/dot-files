@@ -2,6 +2,37 @@
   vim.loader.enable()
  end
 
+require('copilot').setup({
+    filetypes = {
+        cvs = false,
+        ["."] = true,
+        gitcommit = true,
+        gitrebase = false,
+        go = true,
+        help = false,
+        markdown = true,
+        perl = true,
+        typescript = true,
+        yaml = false,
+    },
+    panel = { enabled = false },
+    suggestion = {
+        enabled = false,
+        auto_trigger = true,
+        debounce = 75,
+        keymap = {
+            accept = "<M-l>",
+            accept_word = false,
+            accept_line = false,
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+        },
+    },
+});
+
+require('copilot_cmp').setup();
+
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = { 'bash', 'dockerfile', 'go', 'html', 'javascript', 'lua', 'markdown', 'markdown_inline',
         'python', 'regex', 'ruby', 'rust', 'sql', 'typescript', 'vim', 'yaml' },
@@ -54,6 +85,7 @@ cmp.setup({
                 vsnip = 'vsnip',
                 nvim_lua = 'lua',
                 nvim_lsp_signature_help = 'LSP Signature',
+                Copilot = "",
             }
 
             if entry.source.name == 'nvim_lsp' then
@@ -99,6 +131,7 @@ cmp.setup({
         { name = 'nvim_lua', priority = 9 },
         { name = 'nvim_lsp', priority = 9 },
         { name = 'luasnip',  priority = 8 },
+        { name = 'copilot',  group_index = 2 },
     }),
     window = {
         -- completion = cmp.config.window.bordered(),

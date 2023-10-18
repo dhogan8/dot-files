@@ -56,6 +56,8 @@ if has('nvim')
   Plug 'rcarriga/nvim-notify'
   Plug 'shellRaining/hlchunk.nvim' "Highlight indent
   Plug 'folke/trouble.nvim'
+  Plug 'zbirenbaum/copilot.lua'
+  Plug 'zbirenbaum/copilot-cmp'
 endif
 
 call plug#end()
