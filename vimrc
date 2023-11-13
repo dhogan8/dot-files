@@ -245,14 +245,14 @@ augroup END
 :vnoremap <silent> su :!sort -d --ignore-case<bar> uniq<CR>
 
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader><leader> :nohlsearch<cr>
+nnoremap .. :nohlsearch<cr>
 
 " Split management
-nnoremap <leader>v :vsplit<CR>
-nnoremap <leader>s :split<CR>
-nnoremap <leader>w <C-w>w
-nnoremap <leader>. <c-^>
-nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>v         :vsplit<CR>
+nnoremap <leader>s         :split<CR>
+nnoremap <leader>w         <C-w>w
+nnoremap <leader><leader>  <c-^>
+nnoremap <leader>b         :Buffers<CR>
 
 " Trouble
 nnoremap <leader>xx <cmd>TroubleToggle<cr>
