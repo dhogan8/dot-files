@@ -38,7 +38,7 @@ if has('nvim')
   Plug 'hrsh7th/vim-vsnip'
   Plug 'lvimuser/lsp-inlayhints.nvim'
   Plug 'onsails/lspkind.nvim'
-  Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.*', 'do': 'make install_jsregexp'}
+  Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate'}  "We recommend updating the parsers on update
   Plug 'williamboman/mason.nvim'
