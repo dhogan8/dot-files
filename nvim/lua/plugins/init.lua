@@ -431,3 +431,120 @@ require('trouble').setup()
     --style = "#00ffff",
     --},
 --})
+
+-- folding
+-- zR - open all folds
+-- zM - close all folds
+-- zc - close current fold
+-- zo - open current fold
+
+vim.o.foldcolumn = '0' -- hide column by default
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return { 'treesitter', 'indent' }
+    end
+})
+
+local tsj = require('treesj')
+local wk = require("which-key")
+wk.register({
+    f = {
+        f = { '<cmd>Files<cr>', 'open FZF file finder' },
+        c = { function() require('ufo').closeAllFolds() end, 'close all folds' },
+        o = { function() require('ufo').openAllFolds() end, 'open all folds' },
+    },
+    g = {
+        c = { function()
+            require('copilot').setup({
+                filetypes = {
+                    applescript = true,
+                    cvs = false,
+                    ["."] = false,
+                    gitcommit = true,
+                    gitrebase = false,
+                    go = true,
+                    gohtmltmpl = true,
+                    help = false,
+                    lua = true,
+                    markdown = true,
+                    perl = true,
+                    typescript = true,
+                    yaml = true,
+                },
+                panel = { enabled = false },
+                suggestion = {
+                    enabled = false,
+                    auto_trigger = true,
+                    debounce = 75,
+                    keymap = {
+                        accept = "<M-l>",
+                        accept_word = false,
+                        accept_line = false,
+                        next = "<M-]>",
+                        prev = "<M-[>",
+                        dismiss = "<C-]>",
+                    },
+                },
+            });
+            require('copilot_cmp').setup();
+            require('copilot.api').register_status_notification_handler(function(data)
+                -- customize your message however you want
+                local msg = '?'
+                if data.status == 'Normal' then
+                    msg = ' '
+                elseif data.status == 'InProgress' then
+                    msg = ' '
+                else
+                    msg = ' '
+                end
+                vim.print(msg)
+            end)
+            vim.opt.formatoptions:remove({ 'o' })
+        end, 'set up and start GH copilot' },
+        d = { function()
+            vim.print('foo')
+        end, 'debug stuff'
+        },
+        e = { '<cmd>Copilot enable<cr>', 'enable GH copilot' },
+        t = { function()
+            if vim.opt.number:get() == false then
+                vim.fn.ShowGutter()
+            else
+                vim.fn.HideGutter()
+            end
+        end, 'toggle gutter' },
+        j = { function() tsj.join() end, 'join the object under cursor' },
+        s = { function() tsj.split() end, 'split the object under cursor' },
+        x = { '<cmd>Copilot disable<cr>', 'stop GH copilot' },
+    },
+    l = {
+        l = { function()
+            require('hlchunk').setup({
+                indent = {
+                    chars = { "│", "¦", "┆", "┊", }, -- more code can be found in https://unicodeplus.com/
+                    style = { "#5E81AC" },
+                },
+                blank = {
+                    enable = false,
+                }
+            })
+        end, "hlchunk" },
+        h = { "<cmd>DisableHL<cr>", "Disable HL" }
+    },
+    t = {
+        d = { function() require('trouble').open('document_diagnostics') end,
+            'Trouble document diagnostics' },
+        w = { function() require('trouble').open('workspace_diagnostics') end,
+            'Trouble workspace diagnostics' },
+    }
+}, { prefix = "<leader>" })
+
+wk.setup {}
