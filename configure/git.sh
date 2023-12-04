@@ -19,3 +19,4 @@ git config --global alias.pf 'push --force-with-lease'
 git config --global alias.undo 'reset --soft HEAD^'
 git config --global alias.st 'status'
 git config --global alias.gra 'rebase -i --autosquash'
+git config --global alias.root "rev-parse --show-toplevel"

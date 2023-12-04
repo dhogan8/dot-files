@@ -42,6 +42,7 @@ alias tmkp='tm kill-pane'
 alias tmd='tmux detach'
 alias tmns='tmux new -s'
 alias nv='nvim'
+alias cdr='cd $(git root)'
 
 ptest() (
   npx playwright test "$1" --headed --project=chromium
