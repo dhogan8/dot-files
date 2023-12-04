@@ -63,6 +63,7 @@ if has('nvim')
   Plug 'kevinhwang91/nvim-ufo' "Folding
   Plug 'folke/which-key.nvim' " better organization of key mappings
   Plug 'Wansmer/treesj' " SplitJoin replacement
+  Plug 'sindrets/diffview.nvim' " File explorer for git diffs
 endif
 
 call plug#end()
