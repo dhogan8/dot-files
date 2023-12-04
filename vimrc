@@ -7,6 +7,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-slash' "Highlight search results
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'preservim/nerdcommenter'
