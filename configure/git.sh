@@ -20,3 +20,10 @@ git config --global alias.undo 'reset --soft HEAD^'
 git config --global alias.st 'status'
 git config --global alias.gra 'rebase -i --autosquash'
 git config --global alias.root "rev-parse --show-toplevel"
+
+# configure delta as git's pager
+git config --global core.pager 'delta'
+git config --global delta.light false
+git config --global delta.navigate true
+git config --global diff.colorMoved default
+git config --global interactive.diffFilter 'delta --color-only'
