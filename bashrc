@@ -1,5 +1,4 @@
 # shellcheck disable=SC1090
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 add_path() {
