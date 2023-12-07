@@ -1,11 +1,11 @@
 echo 'git config'
 
 git config --global user.name 'Dallas Hogan'
-git config --global user.email 'dallastar4@gmail.com'
+#git config --global user.email 'dallastar4@gmail.com'
 
 git config --global branch.autosetuprebase always
 git config --global color.ui "auto"
-git config --global github.user dhogan8
+#git config --global github.user dhogan8
 
 git config --global alias.b 'branch'
 git config --global alias.ca 'commit --amend'
