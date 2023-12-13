@@ -76,7 +76,10 @@ let g:lightline = {
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \   'modified': 'LightlineModified',
-      \ }
+      \ },
+      \ 'enable': {
+      \   'tabline': 0
+      \ },
       \ }
 
 let g:lightline.active = {
