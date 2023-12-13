@@ -48,7 +48,7 @@ if has('nvim')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'lukas-reineke/lsp-format.nvim'
-  Plug 'akinsho/bufferline.nvim'
+  Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
   Plug 'kyazdani42/nvim-web-devicons' "Recommended (for coloured icons for bufferline.nvim)
   Plug 'SmiteshP/nvim-navic'
   Plug 'SmiteshP/nvim-navbuddy'

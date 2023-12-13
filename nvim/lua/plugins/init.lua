@@ -61,7 +61,13 @@ parser_config.perl = {
 
 vim.opt.termguicolors = true
 vim.opt.mouse = "v"
-require('bufferline').setup {}
+
+require('bufferline').setup {
+    options = {
+        diagnostics = 'nvim_lsp',
+        numbers = 'ordinal',
+    }
+}
 
 -- require('virt-column').setup()
 
