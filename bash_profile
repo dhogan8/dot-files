@@ -45,7 +45,7 @@ alias nv='nvim'
 alias cdr='cd $(git root)'
 
 ptest() (
-  npx playwright test "$1" --headed --project=chromium
+  npm run test "$1" -- --headed --project=chromium "${@/.ts/.js}"
 )
 
 gcp_ssh_username=dhogan_maxmind_com
