@@ -57,8 +57,8 @@ if has('nvim')
   Plug 'rcarriga/nvim-notify'
   Plug 'shellRaining/hlchunk.nvim' "Highlight indent
   Plug 'folke/trouble.nvim'
-  Plug 'zbirenbaum/copilot.lua'
-  Plug 'zbirenbaum/copilot-cmp'
+  "Plug 'zbirenbaum/copilot.lua'
+  "Plug 'zbirenbaum/copilot-cmp'
   Plug 'kevinhwang91/promise-async' "Folding
   Plug 'kevinhwang91/nvim-ufo' "Folding
   Plug 'folke/which-key.nvim' " better organization of key mappings
