@@ -40,7 +40,7 @@ alias tmas='tmux attach-session -t'
 alias tmks='tmux kill-session -t'
 alias tmkp='tm kill-pane'
 alias tmd='tmux detach'
-alias tmns='tmux new -s'
+alias tmns='tmux new-session'
 alias nv='nvim'
 alias cdr='cd $(git root)'
 
