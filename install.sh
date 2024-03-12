@@ -65,6 +65,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install openssl
   brew install hashicorp/tap/hashicorp-vagrant
   brew install --head neovim
+  brew install --cask wezterm
 else
   FILE=oh-my-posh
   cd /tmp || exit
