@@ -199,6 +199,7 @@ set shiftwidth=2
 let g:mapleader = ','
 nnoremap <leader>f : <C-u>FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " vim-mustache-handlebars
 let g:mustache_abbreviations = 1
