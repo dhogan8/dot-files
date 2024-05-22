@@ -235,11 +235,11 @@ require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = {
         "bashls",
-        "docker_compose_language_service",
+        --"docker_compose_language_service",
         "lua_ls",
         "perlnavigator",
         "rust_analyzer",
-        "tsserver",
+        --"tsserver",
         "yamlls",
     }
 }
@@ -247,7 +247,7 @@ require("mason-lspconfig").setup {
 require("lsp-format").setup {}
 
 require 'lspconfig'.bashls.setup {}
-require 'lspconfig'.docker_compose_language_service.setup {}
+--require 'lspconfig'.docker_compose_language_service.setup {}
 require 'lspconfig'.lua_ls.setup {
     settings = {
         Lua = {
@@ -327,11 +327,11 @@ require('lspconfig').rust_analyzer.setup({
     }
 })
 
-require('lspconfig').tsserver.setup {
-    on_attach = require("lsp-format").on_attach,
-    filetypes = { "javascript", "typescript", "typescriptreact" },
-    cmd = { "typescript-language-server", "--stdio" },
-}
+--require('lspconfig').tsserver.setup {
+    --on_attach = require("lsp-format").on_attach,
+    --filetypes = { "javascript", "typescript", "typescriptreact" },
+    --cmd = { "typescript-language-server", "--stdio" },
+--}
 
 require('lspconfig').pylsp.setup {
     settings = {

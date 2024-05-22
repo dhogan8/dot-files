@@ -29,7 +29,6 @@ Plug 'haya14busa/vim-auto-mkdir' " Makes directories
 
 if has('nvim')
   Plug 'ellisonleao/glow.nvim'
-  Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
