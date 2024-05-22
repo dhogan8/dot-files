@@ -6,7 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-slash' "Highlight search results
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -64,6 +64,8 @@ if has('nvim')
   Plug 'folke/which-key.nvim' " better organization of key mappings
   Plug 'Wansmer/treesj' " SplitJoin replacement
   Plug 'sindrets/diffview.nvim' " File explorer for git diffs
+  Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
+  Plug 'nvim-tree/nvim-web-devicons' "optional for icon support
 endif
 
 call plug#end()
@@ -199,7 +201,6 @@ set shiftwidth=2
 let g:mapleader = ','
 nnoremap <leader>f : <C-u>FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " vim-mustache-handlebars
 let g:mustache_abbreviations = 1
