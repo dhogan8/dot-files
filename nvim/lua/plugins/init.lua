@@ -246,9 +246,10 @@ require("mason-lspconfig").setup {
 
 require("lsp-format").setup {}
 
-require 'lspconfig'.bashls.setup {}
---require 'lspconfig'.docker_compose_language_service.setup {}
---require 'lspconfig'.lua_ls.setup {
+local lspconfig = require('lspconfig')
+lspconfig.bashls.setup {}
+--lspconfig.docker_compose_language_service.setup {}
+--lspconfig.lua_ls.setup {
     --settings = {
         --Lua = {
             --runtime = {
@@ -270,7 +271,7 @@ require 'lspconfig'.bashls.setup {}
         --},
     --},
 --}
-require 'lspconfig'.yamlls.setup {}
+lspconfig.yamlls.setup {}
 
 local navbuddy = require("nvim-navbuddy")
 navbuddy.setup {
@@ -282,7 +283,7 @@ navbuddy.setup {
 
 -- After setting up mason-lspconfig you may set up servers via lspconfig
 -- See server/src/server.ts in PerlNavigator for a list of available settings
-require("lspconfig").perlnavigator.setup {
+lspconfig.perlnavigator.setup {
     -- capabilities = capabilities,
     settings = {
         perlnavigator = {
@@ -306,7 +307,7 @@ require("lspconfig").perlnavigator.setup {
     end,
 }
 
-require('lspconfig').rust_analyzer.setup({
+lspconfig.rust_analyzer.setup({
     settings = {
         ["rust-analyzer"] = {
             imports = {
@@ -327,13 +328,9 @@ require('lspconfig').rust_analyzer.setup({
     }
 })
 
-require('lspconfig').tsserver.setup {
-    on_attach = require("lsp-format").on_attach,
-    filetypes = { "javascript", "typescript", "typescriptreact" },
-    cmd = { "typescript-language-server", "--stdio" },
-}
+lspconfig.tsserver.setup({})
 
-require('lspconfig').pylsp.setup {
+lspconfig.pylsp.setup {
     settings = {
         pylsp = {
             plugins = {
@@ -346,7 +343,7 @@ require('lspconfig').pylsp.setup {
     }
 }
 
-require('lspconfig').lua_ls.setup {
+lspconfig.lua_ls.setup {
   on_attach = function()
     on_attach()
     vim.cmd [[autocmd BufWritePre <buffer> lua require'stylua-nvim'.format_file()]]
