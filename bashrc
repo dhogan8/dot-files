@@ -43,6 +43,7 @@ add_path "$HOME/.vim/plugged/fzf/bin"
 [ -f "$HOME"/dot-files/local_bashrc ] && . "$HOME"/dot-files/local_bashrc
 
 add_path "$HOME/local/bin"
+add_path "$HOME/local/bin/nvim-macos/bin"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f 'Users/dallas/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dallas/google-cloud-sdk/path.bash.inc'; fi

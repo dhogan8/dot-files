@@ -20,6 +20,7 @@ add_path() {
     PATH="$1:$PATH"
   fi
 }
+export -f add_path
 
 # Setting PATH for Python 3.8
 # The original version is saved in .bash_profile.pysave
