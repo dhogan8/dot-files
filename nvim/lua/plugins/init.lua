@@ -239,7 +239,7 @@ require("mason-lspconfig").setup {
         "lua_ls",
         "perlnavigator",
         "rust_analyzer",
-        "tsserver",
+        "ts_ls",
         "yamlls",
     }
 }
@@ -328,7 +328,7 @@ lspconfig.rust_analyzer.setup({
     }
 })
 
-lspconfig.tsserver.setup({})
+lspconfig.ts_ls.setup({})
 
 lspconfig.pylsp.setup {
     settings = {
