@@ -66,11 +66,8 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install hashicorp/tap/hashicorp-vagrant
   brew install --head neovim
 else
-  FILE=oh-my-posh
   cd /tmp || exit
-  curl --fail --location https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -o $FILE
-  chmod +x $FILE
-  mv $FILE ~/local/bin/
+  curl -s https://ohmyposh.dev/install.sh | bash -s
   sudo apt install tmux
   sudo apt install python3-pyx
   sudo apt install neovim
