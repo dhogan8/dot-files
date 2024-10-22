@@ -71,6 +71,7 @@ else
   sudo apt install tmux
   sudo apt install python3-pyx
   sudo apt install neovim
+  cd -
 fi
 
 alias ls='ls --color=auto'
@@ -100,3 +101,4 @@ tmux source ~/.tmux.conf
 
 tmux kill-session -t CI
 
+./installer/ubi.sh
