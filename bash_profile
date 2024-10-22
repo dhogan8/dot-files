@@ -30,8 +30,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(oh-my-posh prompt init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
-
 alias ls='ls --color=auto'
 alias s='source ~/.bashrc && source ~/.bash_profile'
 
@@ -71,3 +69,6 @@ alias dw='dev/bin/web/dev-website'
 alias prove-this='dev/bin/test/prove-this'
 alias ptg='precious tidy --git'
 alias pts='precious tidy --staged'
+
+eval "$(oh-my-posh prompt init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
+
