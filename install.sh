@@ -65,6 +65,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install openssl
   brew install hashicorp/tap/hashicorp-vagrant
   brew install --head neovim
+  ./installer/xcode.sh
 else
   cd /tmp || exit
   curl -s https://ohmyposh.dev/install.sh | bash -s
