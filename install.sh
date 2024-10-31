@@ -103,3 +103,4 @@ tmux source ~/.tmux.conf
 tmux kill-session -t CI
 
 ./installer/ubi.sh
+echo "🏁 INSTALLER FINISHED"
