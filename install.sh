@@ -63,14 +63,12 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install cpm
   brew install openssl
   brew install hashicorp/tap/hashicorp-vagrant
-  brew install --head neovim
   ./installer/xcode.sh
 else
   cd /tmp || exit
   curl -s https://ohmyposh.dev/install.sh | bash -s
   sudo apt install tmux
   sudo apt install python3-pyx
-  sudo apt install neovim
   cd -
 fi
 
@@ -102,4 +100,6 @@ tmux source ~/.tmux.conf
 tmux kill-session -t CI
 
 ./installer/ubi.sh
+./installer/nvim.sh
+
 echo "🏁 INSTALLER FINISHED"
