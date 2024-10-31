@@ -69,6 +69,8 @@ alias dw='dev/bin/web/dev-website'
 alias prove-this='dev/bin/test/prove-this'
 alias ptg='precious tidy --git'
 alias pts='precious tidy --staged'
+alias plg='precious lint --git'
+alias pls='precious lint --staged'
 
 eval "$(oh-my-posh prompt init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
 
