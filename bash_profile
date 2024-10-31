@@ -8,11 +8,6 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-# Set PATH, MANPATH, etc., for Homebrew.
-if [ "$(uname)" == "Darwin" ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 # path handling
 # http://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
 add_path() {
@@ -25,6 +20,20 @@ export -f add_path
 # Setting PATH for Python 3.8
 # The original version is saved in .bash_profile.pysave
 add_path "/Library/Frameworks/Python.framework/Versions/3.8/bin:${PATH}"
+
+# Set PATH, MANPATH, etc., for Homebrew.
+if [ "$(uname)" == "Darwin" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  add_path ~/local/bin/nvim-macos/bin
+fi
+
+if is there nvim; then
+    alias vi=nvim
+    alias vim=nvim
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
