@@ -56,7 +56,6 @@ if [ "$(uname)" == "Darwin" ]; then
   mkdir -p $PREFIX/.config/karabiner
   ln -sf $PREFIX/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
   brew install tree
-  brew tap homebrew/cask-fonts
   brew install --cask font-jetbrains-mono-nerd-font
   brew install tmux
   brew install bash
