@@ -14,7 +14,7 @@ if [ "$(uname)" == "Darwin" ]; then
     FILE="$DIR.tar.gz"
     rm -rf $DIR
 else
-    FILE=nvim.appimage
+    FILE=nvim-linux-x86_64.appimage
 fi
 
 curl -LO --fail -z $FILE "$URL$FILE"
