@@ -63,6 +63,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install cpm
   brew install openssl
   brew install hashicorp/tap/hashicorp-vagrant
+  brew install git-lfs
   ./installer/xcode.sh
 else
   cd /tmp || exit
