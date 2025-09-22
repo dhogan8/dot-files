@@ -83,3 +83,6 @@ alias pls='precious lint --staged'
 
 eval "$(oh-my-posh prompt init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
 
+
+# Created by `pipx` on 2025-09-22 13:12:03
+export PATH="$PATH:/home/dhogan_maxmind_com/.local/bin"

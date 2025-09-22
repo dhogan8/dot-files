@@ -112,3 +112,6 @@ export PATH
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Created by `pipx` on 2025-09-22 13:12:03
+export PATH="$PATH:/home/dhogan_maxmind_com/.local/bin"
