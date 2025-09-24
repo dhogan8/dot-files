@@ -13,7 +13,7 @@ if [ -f '/Users/dallas/Desktop/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/dallas/Desktop/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dallas/Desktop/google-cloud-sdk/completion.zsh.inc'; fi
 
-eval "$(oh-my-posh prompt init zsh --config ~/.config/oh-my-posh/themes/theme.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/theme.omp.json)"
 
 alias ls='ls --color=auto'
 

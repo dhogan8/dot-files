@@ -81,7 +81,7 @@ alias pts='precious tidy --staged'
 alias plg='precious lint --git'
 alias pls='precious lint --staged'
 
-eval "$(oh-my-posh prompt init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/theme.omp.json)"
 
 
 # Created by `pipx` on 2025-09-22 13:12:03
