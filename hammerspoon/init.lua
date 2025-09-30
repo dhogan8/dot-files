@@ -162,7 +162,6 @@ Install:andUse(
 local github = "https://github.com/notifications"
 local gmail = "https://mail.google.com/mail/u/0/"
 local ircCloud = "https://www.irccloud.com/irc/"
-local PT = "https://www.pivotaltracker.com"
 
 hs.hotkey.bind(my_hotkeys, "c", nil, open_app_action("Google Chrome"))
 hs.hotkey.bind(my_hotkeys, "g", nil, chrome_tab_action(gmail, gmail .. "#inbox"))
@@ -171,7 +170,6 @@ hs.hotkey.bind(my_hotkeys, "l", nil, open_app_action("Slack"))
 hs.hotkey.bind(my_hotkeys, "m", nil, chrome_tab_action("https://meet.google.com/", ""))
 hs.hotkey.bind(my_hotkeys, "n", nil, chrome_tab_action(github, github))
 hs.hotkey.bind(my_hotkeys, "o", nil, chrome_tab_action(ircCloud, ircCloud .. "magnet/channel/metacpan"))
-hs.hotkey.bind(my_hotkeys, "p", nil, chrome_tab_action(PT, PT))
 hs.hotkey.bind(my_hotkeys, "q", slackifyName)
 
 hs.hotkey.bind(hyper, "c", nil, open_app_action("Google Chrome"))
@@ -181,7 +179,6 @@ hs.hotkey.bind(hyper, "l", nil, open_app_action("Slack"))
 hs.hotkey.bind(hyper, "m", nil, chrome_tab_action("https://meet.google.com/", ""))
 -- hs.hotkey.bind(hyper, "n", nil, chrome_tab_action(github, github))
 hs.hotkey.bind(hyper, "o", nil, chrome_tab_action(ircCloud, ircCloud .. "magnet/channel/metacpan"))
-hs.hotkey.bind(hyper, "p", nil, chrome_tab_action(PT, PT))
 hs.hotkey.bind(hyper, "q", slackifyName)
 
 local open_slack_threads = function(name)
