@@ -4,6 +4,7 @@ set -eux
 
 in="$HOME/local/bin"
 mkdir -p "$in"
+export PATH="$in:$PATH"
 
 if [[ ! "$(command -v curl)" && "$(command -v apt-get)" ]]; then
 	if [[ ! "$(command -v sudo)" ]]; then
@@ -16,11 +17,14 @@ if [ ! "$(command -v "$in/ubi")" ]; then
 	curl --silent --location \
 		https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh |
 		TARGET=$in sh
+fi
 
-else
-	if is cli age "$in/ubi" gt 7 days; then
-		"$in/ubi" --self-upgrade
-	fi
+# Install 'is' first so we can use it in maybe_install
+"$in/ubi" --project oalders/is --in "$in"
+
+# Now upgrade ubi if needed
+if command -v is >/dev/null 2>&1 && is cli age "$in/ubi" gt 7 days; then
+	"$in/ubi" --self-upgrade
 fi
 
 maybe_install() {
@@ -28,7 +32,7 @@ maybe_install() {
 	local repo
 	IFS='/' read -r project repo <<<"$1"
 	if ! is there "$repo" || is cli age "$repo" gt 7 days; then
-		ubi --project "$project/$repo" --in "$in"
+		"$in/ubi" --project "$project/$repo" --in "$in"
 	fi
 }
 
@@ -37,7 +41,6 @@ maybe_install houseabsolute/omegasort
 maybe_install houseabsolute/precious
 maybe_install jqlang/jq
 maybe_install junegunn/fzf
-maybe_install oalders/is
 
 if is os name eq darwin; then
 	if is cli version bat ne 0.24.0 || true; then

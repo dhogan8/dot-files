@@ -2,17 +2,16 @@
 
 set -eux
 
-PREFIX=~/dot-files
+PREFIX="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 FILES_TO_LINK=(bashrc vimrc tmux.conf zshrc vim/coc-settings.json inputrc profile bash_profile ssh/rc)
 
 for FILE in "${FILES_TO_LINK[@]}"; do
 
   FROM="$HOME/.$FILE"
-  if [[ ! -L "$FROM" ]]; then
-    rm -f "$FROM"
-    ln -sf "$PREFIX/$FILE" "$FROM"
-  fi
+  rm -f "$FROM"
+  mkdir -p "$(dirname "$FROM")"
+  ln -sf "$PREFIX/$FILE" "$FROM"
 
 done
 
@@ -66,6 +65,8 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install git-lfs
   ./installer/xcode.sh
 else
+  sudo apt install unzip
+  sudo apt install pipx
   cd /tmp || exit
   curl -s https://ohmyposh.dev/install.sh | bash -s
   sudo apt install tmux
@@ -76,7 +77,7 @@ fi
 alias ls='ls --color=auto'
 
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
-pipx upgrade vim-vint
+pipx install vim-vint
 
 LOCALCHECKOUT=~/.tmux/plugins/tpm
 if [ ! -d $LOCALCHECKOUT ]; then
@@ -89,6 +90,7 @@ fi
 
 # tmux needs to be running in order to source a config file etc
 # automatically update plugins
+tmux kill-session -t CI 2>/dev/null || true
 tmux new-session -d -s CI
 tmux ls
 
