@@ -14,7 +14,13 @@ if [ "$(uname)" == "Darwin" ]; then
     FILE="$DIR.tar.gz"
     rm -rf $DIR
 else
-    FILE=nvim-linux-x86_64.appimage
+    # Detect Linux architecture
+    ARCH=$(uname -m)
+    if [ "$ARCH" == "aarch64" ] || [ "$ARCH" == "arm64" ]; then
+        FILE=nvim-linux-arm64.appimage
+    else
+        FILE=nvim-linux-x86_64.appimage
+    fi
 fi
 
 curl -LO --fail -z $FILE "$URL$FILE"
