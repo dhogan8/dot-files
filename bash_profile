@@ -27,7 +27,7 @@ if [ "$(uname)" == "Darwin" ]; then
   add_path ~/local/bin/nvim-macos/bin
 fi
 
-if is there nvim; then
+if command -v nvim >/dev/null 2>&1; then
     alias vi=nvim
     alias vim=nvim
     export EDITOR=nvim
