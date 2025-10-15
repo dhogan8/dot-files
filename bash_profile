@@ -56,6 +56,10 @@ ptest() (
   npm run test "$1" -- --headed --project=chromium "${@/.ts/.js}"
 )
 
+pcro () (
+  npm run test "$1" -- --project=chromium "${@/.ts/.js}"
+)
+
 gcp_ssh_username=dhogan_maxmind_com
 export gcp_ssh_username
 
