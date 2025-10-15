@@ -48,8 +48,8 @@ curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --c
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install nvim plugins
-nvim +'PlugInstall --sync' +qa
-nvim +'PlugUpdate --sync' +qa
+"$HOME/local/bin/nvim" +'PlugInstall --sync' +qa
+"$HOME/local/bin/nvim" +'PlugUpdate --sync' +qa
 
 echo "done nvim install"
 exit 0
