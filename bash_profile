@@ -80,7 +80,8 @@ fi
 # MM aliases
 alias template='./dev/bin/web/generate-go-default-layout.sh -g'
 alias submit='./dev/bin/general/submit-work.sh'
-alias dw='dev/bin/web/dev-website'
+alias dw='bash dev/bin/web/dev-website'
+alias dwl='bash dev/bin/web/dev-website -pvgfs'
 alias prove-this='dev/bin/test/prove-this'
 alias ptg='precious tidy --git'
 alias pts='precious tidy --staged'
