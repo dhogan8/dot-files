@@ -25,6 +25,8 @@ add_path "/Library/Frameworks/Python.framework/Versions/3.8/bin:${PATH}"
 if [ "$(uname)" == "Darwin" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
   add_path ~/local/bin/nvim-macos/bin
+  # Use GNU coreutils instead of BSD versions
+  add_path /opt/homebrew/opt/coreutils/libexec/gnubin
 fi
 
 if command -v nvim >/dev/null 2>&1; then
