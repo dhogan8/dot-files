@@ -104,6 +104,7 @@ tmux kill-session -t CI
 
 ./installer/ubi.sh
 ./installer/nvim.sh
+./installer/claude.sh
 ./configure/git.sh
 
 echo "🏁 INSTALLER FINISHED"
