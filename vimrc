@@ -1,6 +1,9 @@
 scriptencoding utf-8
 let g:ale_disable_lsp = 1
 
+" Suppress error messages at startup to avoid 'Press ENTER' prompts
+set shortmess+=F
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
