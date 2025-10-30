@@ -31,7 +31,9 @@ if [ "$(uname)" == "Darwin" ]; then
     rm -rf "$dest"
     mv $DIR "$dest"
     rm -f "$HOME/local/bin/nvim"
+    ln -s "$dest/bin/nvim" "$HOME/local/bin/nvim"
     add_path "$HOME/local/bin/nvim-macos/bin"
+    NVIM_BIN="$dest/bin/nvim"
 else
     # Extract AppImage (FUSE not available in containers)
     chmod u+x $FILE
@@ -41,6 +43,7 @@ else
     mv squashfs-root "$dest"
     rm -f "$HOME/local/bin/nvim"
     ln -s "$dest/usr/bin/nvim" "$HOME/local/bin/nvim"
+    NVIM_BIN="$dest/usr/bin/nvim"
 fi
 
 # Install vim-plug for neovim
@@ -48,8 +51,8 @@ curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --c
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install nvim plugins
-"$HOME/local/bin/nvim" +'PlugInstall --sync' +qa
-"$HOME/local/bin/nvim" +'PlugUpdate --sync' +qa
+"$NVIM_BIN" +'PlugInstall --sync' +qa || true
+"$NVIM_BIN" +'PlugUpdate --sync' +qa || true
 
 echo "done nvim install"
 exit 0
