@@ -45,7 +45,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +'PlugInstall --sync' +qa
 vim +'PlugUpdate --sync' +qa
-vim +':GoUpdateBinaries' +qa
+vim +':GoUpdateBinaries' +qa || true  # Allow failure if Go plugin not installed
 
 if [ "$(uname)" == "Darwin" ]; then
   brew upgrade
