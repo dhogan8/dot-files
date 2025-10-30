@@ -1,6 +1,13 @@
 # shellcheck disable=SC1090
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+# Ensure this is treated as an interactive shell for fzf and other tools
+# This is especially important in devcontainer environments
+case $- in
+    *i*) ;;
+    *) return;;
+esac
+
 add_path() {
 	if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
 		PATH="$1:$PATH"
@@ -36,14 +43,33 @@ if which plenv >/dev/null; then eval "$(plenv init -)"; fi
 add_path "$HOME/.rvm/bin"
 export EDITOR=vim
 
+# Enable bash completion
+if [ -f /etc/bash_completion ]; then
+	. /etc/bash_completion
+elif [ -f /usr/share/bash-completion/bash_completion ]; then
+	. /usr/share/bash-completion/bash_completion
+fi
+
 add_path "$HOME/.vim/plugged/fzf/bin"
 
-[ -f "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash ] && . "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash
-[ -f "$HOME"/.vim/plugged/fzf/shell/completion.bash ] && . "$HOME"/.vim/plugged/fzf/shell/completion.bash
+# fzf - fuzzy finder integration (requires interactive shell with TTY)
+if [[ $- == *i* ]]; then
+	[ -f "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash ] && . "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash
+	[ -f "$HOME"/.vim/plugged/fzf/shell/completion.bash ] && . "$HOME"/.vim/plugged/fzf/shell/completion.bash
+
+	# Enable fzf completion for common commands and aliases
+	if type _fzf_setup_completion &>/dev/null; then
+		_fzf_setup_completion path nvim vim nv vi
+	fi
+fi
 [ -f "$HOME"/dot-files/local_bashrc ] && . "$HOME"/dot-files/local_bashrc
 
 add_path "$HOME/local/bin"
 add_path "$HOME/local/bin/nvim-macos/bin"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f 'Users/dallas/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dallas/google-cloud-sdk/path.bash.inc'; fi

@@ -1,7 +1,13 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Bash completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+if [ -f /usr/local/etc/bash_completion ]; then
+  . /usr/local/etc/bash_completion
+elif [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
+elif [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+fi
 
 # Git completion
 if [ -f ~/.git-completion.bash ]; then
