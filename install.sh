@@ -107,6 +107,4 @@ tmux kill-session -t CI
 ./installer/claude.sh
 ./configure/git.sh
 
-source ~/.bash_profile
-
 echo "🏁 INSTALLER FINISHED"
