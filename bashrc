@@ -34,6 +34,17 @@ reset_path() {
     export PATH
 }
 
+# fuzzy cd: choose one directory with fzf and cd into it (bash)
+unalias cdf 2>/dev/null   # harmless if no alias
+cdf() {
+  local sel
+  # produce a newline-separated list, ignore errors from find
+  # read only the first selected line (prevents multi-line selection problems)
+  IFS= read -r sel < <(find . -type d \( -name .git -o -name node_modules \) -prune -false -o -type d 2>/dev/null | fzf --height 40% --reverse --prompt='Dir> ') || return
+  [ -z "$sel" ] && return
+  cd "$sel" || printf 'cdf: failed to cd into %s\n' "$sel"
+}
+
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 
 remove_path "/usr/local/opt/perl/bin"
