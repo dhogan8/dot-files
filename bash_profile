@@ -2,11 +2,26 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Bash completion
 if [ -f /usr/local/etc/bash_completion ]; then
+  # Temporarily disable 'set -u' to avoid unbound variable errors in bash_completion
+  # Save current shell options
+  _shell_opts=$-
+  set +u
   . /usr/local/etc/bash_completion
+  # Restore shell options if 'u' was set
+  [[ $_shell_opts == *u* ]] && set -u
+  unset _shell_opts
 elif [ -f /etc/bash_completion ]; then
+  _shell_opts=$-
+  set +u
   . /etc/bash_completion
+  [[ $_shell_opts == *u* ]] && set -u
+  unset _shell_opts
 elif [ -f /usr/share/bash-completion/bash_completion ]; then
+  _shell_opts=$-
+  set +u
   . /usr/share/bash-completion/bash_completion
+  [[ $_shell_opts == *u* ]] && set -u
+  unset _shell_opts
 fi
 
 # Git completion
