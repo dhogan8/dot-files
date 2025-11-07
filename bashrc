@@ -141,6 +141,8 @@ tmux() {
 	fi
 }
 
+alias cdf='cd "$(find . -type d | fzf)"'
+
 # shellcheck disable=SC2046
 
 unset OPENSSL_PREFIX
