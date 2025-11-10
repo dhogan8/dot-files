@@ -156,4 +156,3 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:/home/dhogan_maxmind_com/.local/bin"
 
 export PATH=$PATH:$HOME/go/bin
-export DISPLAY=host.docker.internal:0
