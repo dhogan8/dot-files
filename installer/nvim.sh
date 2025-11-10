@@ -1,50 +1,57 @@
 #!/usr/bin/env bash
 
-# May need to sudo apt install libfuse2 on Ubuntu >= 22.04
-# https://docs.appimage.org/user-guide/troubleshooting/fuse.html
-
 set -eux
 
-pushd /tmp || exit
-
-URL=https://github.com/neovim/neovim/releases/download/nightly/
-
 if [ "$(uname)" == "Darwin" ]; then
-    DIR=nvim-macos-arm64
-    FILE="$DIR.tar.gz"
-    rm -rf $DIR
-else
-    # Detect Linux architecture
-    ARCH=$(uname -m)
-    if [ "$ARCH" == "aarch64" ] || [ "$ARCH" == "arm64" ]; then
-        FILE=nvim-linux-arm64.appimage
-    else
-        FILE=nvim-linux-x86_64.appimage
+    # macOS: Use Homebrew for stable release
+    if ! command -v brew &> /dev/null; then
+        echo "Error: Homebrew not installed. Please install Homebrew first."
+        exit 1
     fi
-fi
 
-curl -LO --fail -z $FILE "$URL$FILE"
+    # Install or upgrade neovim via Homebrew
+    if brew list neovim &>/dev/null; then
+        echo "Neovim already installed via Homebrew, upgrading..."
+        brew upgrade neovim || true
+    else
+        echo "Installing Neovim via Homebrew..."
+        brew install neovim
+    fi
 
-if [ "$(uname)" == "Darwin" ]; then
-    tar xzvf $FILE
-    dest="$HOME/local/bin/nvim-macos"
-    rm -rf "$dest"
-    mv $DIR "$dest"
-    rm -f "$HOME/local/bin/nvim"
-    ln -s "$dest/bin/nvim" "$HOME/local/bin/nvim"
-    add_path "$HOME/local/bin/nvim-macos/bin"
-    NVIM_BIN="$dest/bin/nvim"
+    NVIM_BIN="$(brew --prefix)/bin/nvim"
 else
-    # Extract AppImage (FUSE not available in containers)
-    chmod u+x $FILE
-    ./$FILE --appimage-extract
-    dest="$HOME/local/bin/nvim-linux"
-    rm -rf "$dest"
-    mv squashfs-root "$dest"
-    rm -f "$HOME/local/bin/nvim"
-    ln -s "$dest/usr/bin/nvim" "$HOME/local/bin/nvim"
-    NVIM_BIN="$dest/usr/bin/nvim"
+    # Linux: Use system package manager for stable release
+    if command -v apt-get &> /dev/null; then
+        # Debian/Ubuntu
+        echo "Installing Neovim via apt..."
+        sudo apt-get update
+        sudo apt-get install -y neovim
+    elif command -v dnf &> /dev/null; then
+        # Fedora/RHEL
+        echo "Installing Neovim via dnf..."
+        sudo dnf install -y neovim
+    elif command -v yum &> /dev/null; then
+        # Older RHEL/CentOS
+        echo "Installing Neovim via yum..."
+        sudo yum install -y neovim
+    elif command -v pacman &> /dev/null; then
+        # Arch Linux
+        echo "Installing Neovim via pacman..."
+        sudo pacman -S --noconfirm neovim
+    elif command -v apk &> /dev/null; then
+        # Alpine Linux
+        echo "Installing Neovim via apk..."
+        sudo apk add neovim
+    else
+        echo "Error: No supported package manager found (apt, dnf, yum, pacman, apk)"
+        exit 1
+    fi
+
+    NVIM_BIN="$(command -v nvim)"
 fi
+
+echo "Neovim installed at: $NVIM_BIN"
+"$NVIM_BIN" --version
 
 # Install vim-plug for neovim
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -54,5 +61,5 @@ curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --c
 "$NVIM_BIN" +'PlugInstall --sync' +qa || true
 "$NVIM_BIN" +'PlugUpdate --sync' +qa || true
 
-echo "done nvim install"
+echo "✓ Neovim installation complete"
 exit 0

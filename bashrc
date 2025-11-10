@@ -76,7 +76,7 @@ fi
 [ -f "$HOME"/dot-files/local_bashrc ] && . "$HOME"/dot-files/local_bashrc
 
 add_path "$HOME/local/bin"
-add_path "$HOME/local/bin/nvim-macos/bin"
+# add_path "$HOME/local/bin/nvim-macos/bin"  # Commented out - using package manager nvim instead
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
