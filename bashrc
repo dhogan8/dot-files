@@ -49,17 +49,22 @@ alias updatedb="sudo /usr/libexec/locate.updatedb"
 
 remove_path "/usr/local/opt/perl/bin"
 add_path "$HOME/.plenv/bin"
-if which plenv >/dev/null; then eval "$(plenv init -)"; fi
+_load_plenv() {
+  if which plenv >/dev/null; then eval "$(plenv init -)"; fi
+}
+plenv() {
+  unset -f plenv perl
+  _load_plenv
+  plenv "$@"
+}
+perl() {
+  unset -f plenv perl
+  _load_plenv
+  perl "$@"
+}
 
 add_path "$HOME/.rvm/bin"
 export EDITOR=vim
-
-# Enable bash completion
-if [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
-elif [ -f /usr/share/bash-completion/bash_completion ]; then
-	. /usr/share/bash-completion/bash_completion
-fi
 
 add_path "$HOME/.vim/plugged/fzf/bin"
 
@@ -79,8 +84,30 @@ add_path "$HOME/local/bin"
 # add_path "$HOME/local/bin/nvim-macos/bin"  # Commented out - using package manager nvim instead
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+_load_nvm() {
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+nvm() {
+  unset -f nvm node npm npx
+  _load_nvm
+  nvm "$@"
+}
+node() {
+  unset -f nvm node npm npx
+  _load_nvm
+  node "$@"
+}
+npm() {
+  unset -f nvm node npm npx
+  _load_nvm
+  npm "$@"
+}
+npx() {
+  unset -f nvm node npm npx
+  _load_nvm
+  npx "$@"
+}
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f 'Users/dallas/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dallas/google-cloud-sdk/path.bash.inc'; fi
