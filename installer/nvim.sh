@@ -20,9 +20,12 @@ if [ "$(uname)" == "Darwin" ]; then
 
     NVIM_BIN="$(brew --prefix)/bin/nvim"
 else
-    # Linux: Use system package manager for stable release
+    # Linux: Use system package manager
     if command -v apt-get &> /dev/null; then
-        # Debian/Ubuntu
+        # Debian/Ubuntu - use unstable PPA for neovim 0.10+
+        echo "Adding neovim unstable PPA..."
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository ppa:neovim-ppa/unstable -y
         echo "Installing Neovim via apt..."
         sudo apt-get update
         sudo apt-get install -y neovim
