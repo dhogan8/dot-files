@@ -18,7 +18,7 @@ if command -v npm >/dev/null 2>&1; then
 		else
 			# Need elevated permissions
 			echo "Installing Claude CLI globally (requires sudo)..."
-			sudo npm install -g @anthropic-ai/claude-code
+			sudo "$(command -v npm)" install -g @anthropic-ai/claude-code
 		fi
 	fi
 else
