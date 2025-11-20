@@ -237,8 +237,8 @@ require("mason-lspconfig").setup {
         "bashls",
         --"docker_compose_language_service",
         "lua_ls",
-        "perlnavigator",
-        "rust_analyzer",
+        --"perlnavigator",  -- Installed globally via npm
+        --"rust_analyzer",
         "ts_ls",
         "yamlls",
     }
@@ -307,26 +307,26 @@ lspconfig.perlnavigator.setup {
     end,
 }
 
-lspconfig.rust_analyzer.setup({
-    settings = {
-        ["rust-analyzer"] = {
-            imports = {
-                granularity = {
-                    group = "module",
-                },
-                prefix = "self",
-            },
-            cargo = {
-                buildScripts = {
-                    enable = true,
-                },
-            },
-            procMacro = {
-                enable = true
-            },
-        }
-    }
-})
+--lspconfig.rust_analyzer.setup({
+    --settings = {
+        --["rust-analyzer"] = {
+            --imports = {
+                --granularity = {
+                    --group = "module",
+                --},
+                --prefix = "self",
+            --},
+            --cargo = {
+                --buildScripts = {
+                    --enable = true,
+                --},
+            --},
+            --procMacro = {
+                --enable = true
+            --},
+        --}
+    --}
+--})
 
 lspconfig.ts_ls.setup({})
 
