@@ -84,30 +84,9 @@ add_path "$HOME/local/bin"
 # add_path "$HOME/local/bin/nvim-macos/bin"  # Commented out - using package manager nvim instead
 
 export NVM_DIR="$HOME/.nvm"
-_load_nvm() {
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-}
-nvm() {
-  unset -f nvm node npm npx
-  _load_nvm
-  nvm "$@"
-}
-node() {
-  unset -f nvm node npm npx
-  _load_nvm
-  node "$@"
-}
-npm() {
-  unset -f nvm node npm npx
-  _load_nvm
-  npm "$@"
-}
-npx() {
-  unset -f nvm node npm npx
-  _load_nvm
-  npx "$@"
-}
+# Load nvm immediately (not lazy-loaded)
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f 'Users/dallas/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dallas/google-cloud-sdk/path.bash.inc'; fi

@@ -81,6 +81,10 @@ pcro () (
 gcp_ssh_username=dhogan_maxmind_com
 export gcp_ssh_username
 
+# Load nvm for login shells
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
 export PATH
 
 # The next line updates PATH for the Google Cloud SDK.
