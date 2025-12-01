@@ -20,37 +20,24 @@ if [ "$(uname)" == "Darwin" ]; then
 
     NVIM_BIN="$(brew --prefix)/bin/nvim"
 else
-    # Linux: Use system package manager
-    if command -v apt-get &> /dev/null; then
-        # Debian/Ubuntu - use unstable PPA for neovim 0.10+
-        echo "Adding neovim unstable PPA..."
-        sudo apt-get install -y software-properties-common
-        sudo add-apt-repository ppa:neovim-ppa/unstable -y
-        echo "Installing Neovim via apt..."
-        sudo apt-get update
-        sudo apt-get install -y neovim
-    elif command -v dnf &> /dev/null; then
-        # Fedora/RHEL
-        echo "Installing Neovim via dnf..."
-        sudo dnf install -y neovim
-    elif command -v yum &> /dev/null; then
-        # Older RHEL/CentOS
-        echo "Installing Neovim via yum..."
-        sudo yum install -y neovim
-    elif command -v pacman &> /dev/null; then
-        # Arch Linux
-        echo "Installing Neovim via pacman..."
-        sudo pacman -S --noconfirm neovim
-    elif command -v apk &> /dev/null; then
-        # Alpine Linux
-        echo "Installing Neovim via apk..."
-        sudo apk add neovim
-    else
-        echo "Error: No supported package manager found (apt, dnf, yum, pacman, apk)"
-        exit 1
+    # Linux: Download from GitHub releases (more reliable than PPAs)
+    echo "Installing Neovim from GitHub releases..."
+
+    NVIM_VERSION="stable"
+    NVIM_TARBALL="nvim-linux-arm64.tar.gz"
+    if [ "$(uname -m)" = "x86_64" ]; then
+        NVIM_TARBALL="nvim-linux-x86_64.tar.gz"
     fi
 
-    NVIM_BIN="$(command -v nvim)"
+    cd /tmp
+    curl -LO "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_TARBALL}"
+    sudo rm -rf /opt/nvim
+    sudo tar -C /opt -xzf "$NVIM_TARBALL"
+    sudo ln -sf /opt/nvim-linux-*/bin/nvim /usr/local/bin/nvim
+    rm -f "$NVIM_TARBALL"
+    cd -
+
+    NVIM_BIN="/usr/local/bin/nvim"
 fi
 
 echo "Neovim installed at: $NVIM_BIN"
