@@ -50,6 +50,7 @@ curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --c
 # Install nvim plugins
 "$NVIM_BIN" +'PlugInstall --sync' +qa || true
 "$NVIM_BIN" +'PlugUpdate --sync' +qa || true
+"$NVIM_BIN" +'TSUpdate' +qa || true
 
 echo "✓ Neovim installation complete"
 exit 0

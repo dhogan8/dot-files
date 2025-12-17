@@ -33,31 +33,43 @@
 
 --require('copilot_cmp').setup();
 
-require 'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'bash', 'dockerfile', 'go', 'html', 'javascript', 'lua', 'markdown', 'markdown_inline',
-        'python', 'regex', 'ruby', 'rust', 'sql', 'typescript', 'vim', 'yaml' },
-    -- ensure_installed = 'all',
-    highlight = {
-        enable = true, -- false will disable the whole extension
-        disable = {}, -- list of language that will be disabled
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
-    },
-}
+-- Safely load treesitter configuration
+local status_ok, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
+if status_ok then
+    treesitter_configs.setup {
+        ensure_installed = { 'bash', 'dockerfile', 'go', 'html', 'javascript', 'lua', 'markdown', 'markdown_inline',
+            'python', 'regex', 'ruby', 'rust', 'sql', 'typescript', 'vim', 'yaml' },
+        -- ensure_installed = 'all',
+        highlight = {
+            enable = true, -- false will disable the whole extension
+            disable = {}, -- list of language that will be disabled
+            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+            -- Using this option may slow down your editor, and you may see some duplicate highlights.
+            -- Instead of true it can also be a list of languages
+            additional_vim_regex_highlighting = false,
+        },
+    }
+else
+    vim.notify('nvim-treesitter.configs not found. Run :PlugInstall to install plugins.', vim.log.levels.WARN)
+end
 
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-parser_config.perl = {
-    install_info = {
-        url = 'https://github.com/tree-sitter-perl/tree-sitter-perl',
-        revision = 'release',
-        files = { 'src/parser.c', 'src/scanner.c' },
-    },
-    maintainers = { '@leonerd' },
-    filetype = 'perl',
-}
+-- Configure custom Perl parser
+local status_ok_parsers, parsers = pcall(require, 'nvim-treesitter.parsers')
+if status_ok_parsers and parsers.get_parser_configs then
+    local parser_config = parsers.get_parser_configs()
+    if parser_config then
+        parser_config.perl = {
+            install_info = {
+                url = 'https://github.com/tree-sitter-perl/tree-sitter-perl',
+                revision = 'release',
+                files = { 'src/parser.c', 'src/scanner.c' },
+            },
+            maintainers = { '@leonerd' },
+            filetype = 'perl',
+        }
+    end
+end
 
 vim.opt.termguicolors = true
 vim.opt.mouse = "v"
