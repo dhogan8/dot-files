@@ -146,6 +146,7 @@ let g:lightline.active = {
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nnoremap <leader>af :ALEFix<CR>
 
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -160,6 +161,7 @@ let g:ale_fixers = {
   \   'perl': ['perltidy', 'perlimports'],
   \   'ruby': ['rubocop'],
   \   'rust': ['rustfmt'],
+  \   'scss': ['prettier'],
   \   'sh': ['shfmt'],
   \   'typescript': ['prettier'],
   \   'typescriptreact': ['eslint', 'prettier'],
