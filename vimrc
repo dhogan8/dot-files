@@ -148,9 +148,12 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <leader>af :ALEFix<CR>
 
+" Configure gci to match project's golangci-lint settings
+let g:ale_go_gci_options = '-s standard -s default -s "prefix(github.maxmind.com/maxmind/mm_website)"'
+
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \   'go': ['gofumpt'],
+  \   'go': ['gci', 'goimports', 'gofmt'],
   \   'gohtml': ['prettier'],
   \   'java': ['google_java_format'],
   \   'javascript': ['eslint', 'prettier_eslint'],
