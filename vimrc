@@ -68,6 +68,7 @@ if has('nvim')
   Plug 'sindrets/diffview.nvim' " File explorer for git diffs
   Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
   Plug 'nvim-tree/nvim-web-devicons' "optional for icon support
+  Plug 'greggh/claude-code.nvim' "Auto-reload buffers when Claude Code edits files
 endif
 
 call plug#end()

@@ -488,6 +488,12 @@ wk.setup {}
 local fzf_lua = require('fzf-lua')
 fzf_lua.setup({ "fzf-vim" })
 
+-- Claude Code integration
+local claude_ok, claude_code = pcall(require, 'claude-code')
+if claude_ok then
+  claude_code.setup()
+end
+
 fzf_lua.git_domo = function()
   fzf_lua.files({
     prompt = 'GitDomo>',
