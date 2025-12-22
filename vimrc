@@ -268,9 +268,9 @@ nnoremap <leader><leader>  <c-^>
 nnoremap <leader>b         :Buffers<CR>
 
 " Trouble
-nnoremap <leader>xx <cmd>TroubleToggle<cr>
-nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
-nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
-nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
-nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
-nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+nnoremap <leader>xx <cmd>Trouble diagnostics toggle<cr>
+nnoremap <leader>xw <cmd>Trouble diagnostics toggle<cr>
+nnoremap <leader>xd <cmd>Trouble diagnostics toggle filter.buf=0<cr>
+nnoremap <leader>xq <cmd>Trouble qflist toggle<cr>
+nnoremap <leader>xl <cmd>Trouble loclist toggle<cr>
+nnoremap gR <cmd>Trouble lsp_references toggle<cr>
