@@ -94,6 +94,9 @@ if [ -f 'Users/dallas/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dallas/g
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/dallas/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/dallas/google-cloud-sdk/completion.bash.inc'; fi
 
+# Use Python 3 for Google Cloud SDK to avoid deprecation warnings
+export CLOUDSDK_PYTHON=/usr/bin/python3
+
 set -o vi
 
 unset PS1
