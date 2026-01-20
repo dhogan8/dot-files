@@ -166,3 +166,8 @@ export PATH="$PATH:/home/dhogan_maxmind_com/.local/bin"
 
 export PATH=$PATH:$HOME/go/bin
 export PATH="$HOME/.local/bin:$PATH"
+
+# Fix SSH agent forwarding in tmux - auto-refresh SSH_AUTH_SOCK on new panes/windows
+if [ -n "$TMUX" ]; then
+    eval "$(tmux show-environment -s SSH_AUTH_SOCK 2>/dev/null)"
+fi
