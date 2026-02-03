@@ -167,7 +167,33 @@ export PATH="$PATH:/home/dhogan_maxmind_com/.local/bin"
 export PATH=$PATH:$HOME/go/bin
 export PATH="$HOME/.local/bin:$PATH"
 
-# Fix SSH agent forwarding in tmux - auto-refresh SSH_AUTH_SOCK on new panes/windows
+# Auto-refresh tmux-tracked environment variables on new panes/windows
+# This syncs SSH_AUTH_SOCK, GH_ENTERPRISE_TOKEN, LINEAR_TOKEN, etc.
+# Only imports variables that are SET (not marked with - for removal)
 if [ -n "$TMUX" ]; then
-    eval "$(tmux show-environment -s SSH_AUTH_SOCK 2>/dev/null)"
+    while IFS= read -r line; do
+        if [[ $line == *=* ]]; then
+            export "$line"
+        fi
+    done < <(tmux show-environment 2>/dev/null)
 fi
+
+# Helper to export a token and update tmux's session environment
+# Usage: set_token GH_ENTERPRISE_TOKEN "your-token-value"
+#    or: set_token GH_ENTERPRISE_TOKEN (will prompt for value)
+set_token() {
+    local name="$1"
+    local value="$2"
+    if [ -z "$value" ]; then
+        read -rsp "Enter value for $name: " value
+        echo
+    fi
+    export "$name=$value"
+    if [ -n "$TMUX" ]; then
+        tmux set-environment "$name" "$value"
+    fi
+}
+
+# Shortcuts for common tokens
+alias set_ghe='set_token GH_ENTERPRISE_TOKEN'
+alias set_linear='set_token LINEAR_TOKEN'
