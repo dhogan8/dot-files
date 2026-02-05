@@ -8,6 +8,7 @@ if command -v npm >/dev/null 2>&1; then
 		echo "Claude CLI is already installed ($(claude --version 2>/dev/null || echo 'version unknown'))"
 	else
 		NPM_PREFIX=$(npm config get prefix)
+		mkdir -p "$NPM_PREFIX/lib/node_modules" "$NPM_PREFIX/bin"
 		if [ -w "$NPM_PREFIX/lib/node_modules" ] && [ -w "$NPM_PREFIX/bin" ]; then
 			npm install -g @anthropic-ai/claude-code
 		else
