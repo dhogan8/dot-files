@@ -69,6 +69,7 @@ alias tmd='tmux detach'
 alias tmns='tmux new-session'
 alias nv='nvim'
 alias cdr='cd $(git root)'
+alias mmdev='devpod ssh mmwebsite -- -L 8443:localhost:8443 -L 8080:localhost:8080 -N'
 
 ptest() (
   npm run test "$1" -- --headed --project=chromium "${@/.ts/.js}"
