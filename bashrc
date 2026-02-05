@@ -155,7 +155,7 @@ alias cdf='cd "$(find . -type d | fzf)"'
 # shellcheck disable=SC2046
 
 unset OPENSSL_PREFIX
-export PROMPT_COMMAND="_omp_hook; history -a"
+export PROMPT_COMMAND='_omp_hook 2>/dev/null; history -a'
 export PATH
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.

@@ -4,6 +4,12 @@ set -eux
 
 PREFIX="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Trust mise config files to prevent interactive prompts
+if command -v mise >/dev/null 2>&1; then
+  mise trust /workspaces/mmwebsite 2>/dev/null || true
+  mise trust ~/.config/mise/config.toml 2>/dev/null || true
+fi
+
 FILES_TO_LINK=(bashrc vimrc tmux.conf zshrc vim/coc-settings.json inputrc profile bash_profile ssh/rc)
 
 for FILE in "${FILES_TO_LINK[@]}"; do
@@ -43,9 +49,8 @@ fi
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim +'PlugInstall --sync' +qa
-vim +'PlugUpdate --sync' +qa
-vim +':GoUpdateBinaries' +qa || true  # Allow failure if Go plugin not installed
+nvim --headless +'PlugInstall --sync' +qa
+nvim --headless +':GoUpdateBinaries' +qa || true  # Allow failure if Go plugin not installed
 
 if [ "$(uname)" == "Darwin" ]; then
   brew upgrade
