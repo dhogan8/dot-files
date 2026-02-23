@@ -1,0 +1,49 @@
+[alias]
+	b = branch
+	ca = commit --amend
+	can = commit --amend --no-edit
+	co = checkout
+	ct = commit
+	dc = diff --cached
+	doms = diff -w -M origin/main...HEAD --stat --name-only
+	dstat = diff main... --shortstat
+	gra = rebase -i --autosquash
+	ndc = !git --no-pager diff --cached
+	ndiff = !git --no-pager diff
+	pf = push --force-with-lease
+	prom = pull --rebase origin main
+	rbc = rebase --continue
+	root = rev-parse --show-toplevel
+	rsh = reset --soft HEAD~
+	st = status
+	undo = reset --soft HEAD^
+
+[branch]
+	autosetuprebase = always
+
+[color]
+	ui = auto
+
+[push]
+	autoSetupRemote = true
+
+[core]
+	pager = delta
+	trustctime = false
+	checkstat = minimal
+
+[delta]
+	light = false
+	navigate = true
+
+[diff]
+	colorMoved = default
+
+[interactive]
+	diffFilter = delta --color-only
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

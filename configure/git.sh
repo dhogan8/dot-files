@@ -1,32 +1,23 @@
+#!/bin/bash
+
 echo 'git config'
 
-git config --global user.name 'Dallas Hogan'
-#git config --global user.email 'dallastar4@gmail.com'
+PREFIX="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-git config --global branch.autosetuprebase always
-git config --global color.ui "auto"
-#git config --global github.user dhogan8
+# Remove sections now managed by gitconfig-shared to avoid stale duplicates
+for section in alias branch color push core delta diff interactive 'filter "lfs"'; do
+  git config --global --remove-section "$section" 2>/dev/null || true
+done
 
-git config --global alias.b 'branch'
-git config --global alias.ca 'commit --amend'
-git config --global alias.can 'commit --amend --no-edit'
-git config --global alias.ct 'commit'
-git config --global alias.co 'checkout'
-git config --global alias.dc 'diff --cached'
-git config --global alias.ndc '!git --no-pager diff --cached'
-git config --global alias.ndiff '!git --no-pager diff'
-git config --global alias.doms 'diff -w -M origin/main...HEAD --stat --name-only'
-git config --global alias.dstat 'diff main... --shortstat'
-git config --global alias.prom 'pull --rebase origin main'
-git config --global alias.pf 'push --force-with-lease'
-git config --global alias.undo 'reset --soft HEAD^'
-git config --global alias.st 'status'
-git config --global alias.gra 'rebase -i --autosquash'
-git config --global alias.root "rev-parse --show-toplevel"
+# Include shared config (aliases, delta, colors, lfs, etc.)
+git config --global include.path "$PREFIX/gitconfig-shared"
 
-# configure delta as git's pager
-git config --global core.pager 'delta'
-git config --global delta.light false
-git config --global delta.navigate true
-git config --global diff.colorMoved default
-git config --global interactive.diffFilter 'delta --color-only'
+# Environment-specific settings
+if [ "$(uname)" == "Darwin" ]; then
+  git config --global user.name 'Dallas Hogan'
+  git config --global user.email 'dallastar4@gmail.com'
+  git config --global github.user dhogan8
+else
+  git config --global user.name 'Dallas Hogan'
+  # Devcontainer email/github are set by the repo's .gitconfig or environment
+fi
