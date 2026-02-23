@@ -47,10 +47,7 @@ elif [[ ! -L $nvim_conf_dir ]]; then
   ln -sf $PREFIX/nvim "$nvim_conf_dir"
 fi
 
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim --headless +'PlugInstall --sync' +qa
-nvim --headless +':GoUpdateBinaries' +qa || true  # Allow failure if Go plugin not installed
+# --- Install system packages ---
 
 if [ "$(uname)" == "Darwin" ]; then
   brew upgrade
@@ -70,19 +67,43 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install git-lfs
   ./installer/xcode.sh
 else
-  sudo apt install unzip
-  sudo apt install pipx
+  sudo apt install -y unzip
+  sudo apt install -y pipx
   cd /tmp || exit
   curl -s https://ohmyposh.dev/install.sh | bash -s
-  sudo apt install tmux
-  sudo apt install python3-pyx
+  sudo apt install -y tmux
+  sudo apt install -y python3-pyx
   cd -
 fi
 
+# --- Run sub-installers before using the tools they provide ---
+
+./installer/ubi.sh
+./installer/nvim.sh
+./installer/claude.sh
+./configure/git.sh
+
+# --- Set up tools that depend on the installers above ---
+
 alias ls='ls --color=auto'
 
-go install mvdan.cc/sh/v3/cmd/shfmt@latest
-pipx install vim-vint
+if command -v go >/dev/null 2>&1; then
+  go install mvdan.cc/sh/v3/cmd/shfmt@latest || true
+fi
+
+if command -v pipx >/dev/null 2>&1; then
+  pipx install vim-vint || true
+fi
+
+# Install vim plugins (nvim is now available from installer/nvim.sh)
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if command -v nvim >/dev/null 2>&1; then
+  nvim --headless +'PlugInstall --sync' +qa
+  nvim --headless +':GoUpdateBinaries' +qa || true  # Allow failure if Go plugin not installed
+fi
+
+# --- tmux plugin management ---
 
 LOCALCHECKOUT=~/.tmux/plugins/tpm
 if [ ! -d $LOCALCHECKOUT ]; then
@@ -106,10 +127,5 @@ tmux source ~/.tmux.conf
 ~/.tmux/plugins/tpm/bin/clean_plugins
 
 tmux kill-session -t CI
-
-./installer/ubi.sh
-./installer/nvim.sh
-./installer/claude.sh
-./configure/git.sh
 
 echo "🏁 INSTALLER FINISHED"
