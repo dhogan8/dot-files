@@ -28,6 +28,7 @@
 	autoSetupRemote = true
 
 [core]
+	editor = nvim
 	pager = delta
 	trustctime = false
 	checkstat = minimal
