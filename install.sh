@@ -95,6 +95,10 @@ if command -v pipx >/dev/null 2>&1; then
   pipx install vim-vint || true
 fi
 
+if command -v npm >/dev/null 2>&1; then
+  npm install -g @openai/codex || true
+fi
+
 # Install vim plugins (nvim is now available from installer/nvim.sh)
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
