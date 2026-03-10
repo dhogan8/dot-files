@@ -235,7 +235,7 @@ fun! ShowGutter()
     :GitGutterEnable
     :set number
     :set list
-    :set scl=auto
+    :set scl=yes
 endfun
 
 " CamelCaseMotion
