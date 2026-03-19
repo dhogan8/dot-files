@@ -10,6 +10,7 @@
 	gra = rebase -i --autosquash
 	ndc = !git --no-pager diff --cached
 	ndiff = !git --no-pager diff
+	p = push
 	pf = push --force-with-lease
 	prom = pull --rebase origin main
 	rbc = rebase --continue
