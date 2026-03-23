@@ -67,6 +67,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install git-lfs
   ./installer/xcode.sh
 else
+  sudo apt-get update
   sudo apt install -y unzip
   sudo apt install -y pipx
   cd /tmp || exit
