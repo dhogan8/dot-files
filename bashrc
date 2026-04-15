@@ -97,6 +97,12 @@ if [ -f '/Users/dallas/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/d
 # Use Python 3 for Google Cloud SDK to avoid deprecation warnings
 export CLOUDSDK_PYTHON=/usr/bin/python3
 
+# Stable SSH agent socket path so tmux sessions survive reconnects
+if [ -n "$SSH_AUTH_SOCK" ] && [ "$SSH_AUTH_SOCK" != "$HOME/.ssh/ssh_auth_sock" ]; then
+    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh_auth_sock"
+fi
+export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+
 set -o vi
 
 unset PS1
