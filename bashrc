@@ -205,3 +205,4 @@ alias set_ghe='set_token GH_ENTERPRISE_TOKEN'
 alias set_linear='set_token LINEAR_TOKEN'
 
 export PATH="/opt/nodejs/bin:$PATH"
+eval "$(mise activate bash)"
