@@ -64,7 +64,11 @@ perl() {
 }
 
 add_path "$HOME/.rvm/bin"
-export EDITOR=vim
+if command -v nvim >/dev/null 2>&1; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
 
 add_path "$HOME/.vim/plugged/fzf/bin"
 
