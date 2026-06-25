@@ -101,11 +101,28 @@ if [ -f '/Users/dallas/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/d
 # Use Python 3 for Google Cloud SDK to avoid deprecation warnings
 export CLOUDSDK_PYTHON=/usr/bin/python3
 
-# Stable SSH agent socket path so tmux sessions survive reconnects
-if [ -n "$SSH_AUTH_SOCK" ] && [ "$SSH_AUTH_SOCK" != "$HOME/.ssh/ssh_auth_sock" ]; then
-    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh_auth_sock"
-fi
-export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+# Keep $HOME/.ssh/ssh_auth_sock pointed at a LIVE forwarded agent so tmux and
+# reconnected sessions survive. VS Code/DevPod mint a new
+# /tmp/auth-agent*/listener.sock on each reconnect, so the stable symlink goes
+# stale and git fails with "Permission denied (publickey)". Self-heal here.
+_mm_relink_ssh_agent() {
+    local stable="$HOME/.ssh/ssh_auth_sock" sock
+    if [ -n "$SSH_AUTH_SOCK" ] && [ "$SSH_AUTH_SOCK" != "$stable" ] \
+        && [ -S "$SSH_AUTH_SOCK" ] \
+        && SSH_AUTH_SOCK="$SSH_AUTH_SOCK" ssh-add -l >/dev/null 2>&1; then
+        ln -sf "$SSH_AUTH_SOCK" "$stable"
+    elif ! { [ -S "$stable" ] && SSH_AUTH_SOCK="$stable" ssh-add -l >/dev/null 2>&1; }; then
+        for sock in $(ls -1t /tmp/auth-agent*/listener.sock 2>/dev/null); do
+            if SSH_AUTH_SOCK="$sock" ssh-add -l >/dev/null 2>&1; then
+                ln -sf "$sock" "$stable"
+                break
+            fi
+        done
+    fi
+    export SSH_AUTH_SOCK="$stable"
+}
+_mm_relink_ssh_agent
+unset -f _mm_relink_ssh_agent
 
 set -o vi
 
