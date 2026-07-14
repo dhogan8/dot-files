@@ -2,21 +2,27 @@
 
 set -eux
 
-# Install Claude CLI globally (works on both macOS and Linux/devcontainer)
-if command -v npm >/dev/null 2>&1; then
-	if command -v claude >/dev/null 2>&1; then
-		echo "Claude CLI is already installed ($(claude --version 2>/dev/null || echo 'version unknown'))"
-	else
-		NPM_PREFIX=$(npm config get prefix)
-		mkdir -p "$NPM_PREFIX/lib/node_modules" "$NPM_PREFIX/bin"
-		if [ -w "$NPM_PREFIX/lib/node_modules" ] && [ -w "$NPM_PREFIX/bin" ]; then
-			npm install -g @anthropic-ai/claude-code
-		else
-			sudo env PATH="$PATH" npm install -g @anthropic-ai/claude-code
-		fi
-	fi
-else
-	echo "ERROR: npm not found - cannot install Claude CLI"
-	echo "Ensure Node.js is installed (via mise, nvm, or system package)"
-	exit 1
+# Install Claude CLI globally (works on both macOS and Linux/devcontainer).
+#
+# Health check uses `claude --version`, not `command -v claude`: a broken or
+# incomplete install (e.g. a launcher symlink whose native binary was never
+# downloaded) still satisfies `command -v` but fails to run. Checking that it
+# actually executes ensures a broken install gets repaired rather than skipped.
+if claude --version >/dev/null 2>&1; then
+	echo "Claude CLI is already installed ($(claude --version))"
+	exit 0
 fi
+
+# Remove any stale/broken launcher so it can't shadow the new install.
+rm -f "$HOME/.local/bin/claude"
+
+# Prefer the native installer: it ships a standalone binary and avoids the
+# npm/pnpm optional-dependency + postinstall pitfalls that can leave the
+# platform-native binary undownloaded (--omit=optional, --ignore-scripts,
+# pnpm's default script blocking).
+curl -fsSL https://claude.ai/install.sh | bash
+
+# Ensure the install dir is on PATH for this shell and verify it runs.
+export PATH="$HOME/.local/bin:$PATH"
+hash -r
+claude --version
