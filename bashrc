@@ -225,5 +225,22 @@ set_token() {
 alias set_ghe='set_token GH_ENTERPRISE_TOKEN'
 alias set_linear='set_token LINEAR_TOKEN'
 
+# Reclaim disk space (all regenerates). Biggest hog is stale test-fixture DBs;
+# prune keeps anything used in the last 4h.
+free-disk() {
+    echo "Free before: $(df -h --output=avail / | tail -1 | tr -d ' ')"
+    # Fixture DBs live on the shared cluster; run from any repo.
+    local repo
+    repo=$(git -C "$PWD" rev-parse --show-toplevel 2>/dev/null) || repo=/workspaces/mmwebsite
+    (cd "$repo" && go run ./go/pg/prune-test-databases 2>/dev/null)
+    go clean -cache -testcache -fuzzcache -modcache 2>/dev/null
+    command -v golangci-lint >/dev/null && golangci-lint cache clean 2>/dev/null
+    command -v pnpm >/dev/null && pnpm store prune >/dev/null 2>&1
+    # Sweep stale /tmp by age (safe: won't touch the current session's fresh files).
+    find /tmp -type f -atime +1 -delete 2>/dev/null
+    echo "Free after:  $(df -h --output=avail / | tail -1 | tr -d ' ')"
+    df -h /
+}
+
 export PATH="/opt/nodejs/bin:$PATH"
 eval "$(mise activate bash)"
