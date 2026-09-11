@@ -48,7 +48,7 @@ if has('nvim')
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'jose-elias-alvarez/null-ls.nvim'
+  Plug 'nvimtools/none-ls.nvim'
   Plug 'lukas-reineke/lsp-format.nvim'
   Plug 'akinsho/bufferline.nvim'
   Plug 'kyazdani42/nvim-web-devicons' "Recommended (for coloured icons for bufferline.nvim)
