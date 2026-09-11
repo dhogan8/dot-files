@@ -33,6 +33,10 @@ OHMYPOSH="$HOME/.config/oh-my-posh/themes"
 mkdir -p "$OHMYPOSH"
 ln -sf $PREFIX/oh-my-posh/themes/theme.omp.json "$OHMYPOSH/theme.omp.json"
 
+WORKMUX="$HOME/.config/workmux"
+mkdir -p "$WORKMUX"
+ln -sf $PREFIX/workmux/config.yaml "$WORKMUX/config.yaml"
+
 mkdir -p "$HOME/local/bin"
 
 mkdir -p "$HOME/.vimtmp"
@@ -83,6 +87,7 @@ fi
 ./installer/ubi.sh
 ./installer/nvim.sh
 ./installer/claude.sh
+./installer/workmux.sh
 ./configure/git.sh
 
 # --- Set up tools that depend on the installers above ---
