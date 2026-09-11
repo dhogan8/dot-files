@@ -47,6 +47,7 @@ if has('nvim')
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
+  Plug 'folke/lazydev.nvim' "On-demand lua_ls library loading (fast startup)
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvimtools/none-ls.nvim'
   Plug 'lukas-reineke/lsp-format.nvim'

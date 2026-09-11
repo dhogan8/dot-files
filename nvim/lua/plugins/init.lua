@@ -111,6 +111,7 @@ cmp.setup({
         { name = 'nvim_lua', priority = 9 },
         { name = 'nvim_lsp', priority = 9 },
         { name = 'luasnip',  priority = 8 },
+        { name = 'lazydev',  group_index = 0 }, -- skip LuaLS completions in favor of lazydev
     }),
     window = {
         -- completion = cmp.config.window.bordered(),
@@ -206,11 +207,13 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require("mason").setup()
 require("mason-lspconfig").setup {
+    -- v2 auto-enables every installed mason package via vim.lsp.enable(), which
+    -- double-attaches servers we also configure below and resurrects removed ones.
+    -- Disable it; servers are activated by the explicit lspconfig.*.setup{} calls.
+    automatic_enable = false,
     ensure_installed = {
         "bashls",
-        --"docker_compose_language_service",
         "lua_ls",
-        --"rust_analyzer",
         "ts_ls",
         "yamlls",
     }
@@ -233,18 +236,10 @@ navbuddy.setup {
 
 lspconfig.ts_ls.setup({})
 
-lspconfig.pylsp.setup {
-    settings = {
-        pylsp = {
-            plugins = {
-                pycodestyle = {
-                    ignore = { 'W391' },
-                    maxLineLength = 100
-                }
-            }
-        }
-    }
-}
+-- lazydev loads the Neovim runtime + plugin type info into lua_ls on demand (when a
+-- module is require'd), so lua_ls starts instantly instead of preloading the whole
+-- runtimepath as a workspace library.
+require('lazydev').setup()
 
 lspconfig.lua_ls.setup {
   settings = {
@@ -257,8 +252,7 @@ lspconfig.lua_ls.setup {
         globals = { 'vim' },
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
-        checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
+        checkThirdParty = false,
       },
       telemetry = {
         enable = false,
