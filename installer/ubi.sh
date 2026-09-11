@@ -51,6 +51,12 @@ else
 	ubi --project sharkdp/bat --in "$in"
 fi
 
+# tree-sitter CLI: macOS installs it via brew (tree-sitter-cli). On Linux, fetch the
+# release binary so nvim-treesitter (main branch) can compile parsers.
+if ! is os name eq darwin; then
+	maybe_install tree-sitter/tree-sitter
+fi
+
 if ! is there gh || is cli age gh gt 7 days; then
 	ubi --project cli/cli --in "$in" --exe gh
 fi

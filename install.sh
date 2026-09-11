@@ -57,6 +57,7 @@ if [ "$(uname)" == "Darwin" ]; then
   mkdir -p $PREFIX/.config/karabiner
   ln -sf $PREFIX/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
   brew install tree
+  brew install tree-sitter-cli  # required by nvim-treesitter (main branch) to compile parsers
   brew install tmux
   brew install --cask font-jetbrains-mono-nerd-font
   brew install bash

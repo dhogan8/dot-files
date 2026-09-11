@@ -43,7 +43,7 @@ if has('nvim')
   Plug 'onsails/lspkind.nvim'
   Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
   Plug 'saadparwaiz1/cmp_luasnip'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter', {'branch': 'main', 'do': ':TSUpdate'}
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
@@ -51,16 +51,12 @@ if has('nvim')
   Plug 'nvimtools/none-ls.nvim'
   Plug 'lukas-reineke/lsp-format.nvim'
   Plug 'akinsho/bufferline.nvim'
-  Plug 'kyazdani42/nvim-web-devicons' "Recommended (for coloured icons for bufferline.nvim)
   Plug 'SmiteshP/nvim-navic'
   Plug 'SmiteshP/nvim-navbuddy'
   Plug 'MunifTanjim/nui.nvim'
   Plug 'folke/noice.nvim'
   Plug 'rcarriga/nvim-notify'
-  Plug 'shellRaining/hlchunk.nvim' "Highlight indent
   Plug 'folke/trouble.nvim'
-  "Plug 'zbirenbaum/copilot.lua'
-  "Plug 'zbirenbaum/copilot-cmp'
   Plug 'kevinhwang91/promise-async' "Folding
   Plug 'kevinhwang91/nvim-ufo' "Folding
   Plug 'folke/which-key.nvim' " better organization of key mappings

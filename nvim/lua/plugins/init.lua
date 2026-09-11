@@ -2,73 +2,36 @@
   vim.loader.enable()
  end
 
---require('copilot').setup({
-    --filetypes = {
-        --cvs = false,
-        --["."] = true,
-        --gitcommit = true,
-        --gitrebase = false,
-        --go = true,
-        --help = false,
-        --markdown = true,
-        --perl = true,
-        --typescript = true,
-        --yaml = false,
-    --},
-    --panel = { enabled = false },
-    --suggestion = {
-        --enabled = false,
-        --auto_trigger = true,
-        --debounce = 75,
-        --keymap = {
-            --accept = "<M-l>",
-            --accept_word = false,
-            --accept_line = false,
-            --next = "<M-]>",
-            --prev = "<M-[>",
-            --dismiss = "<C-]>",
-        --},
-    --},
---});
-
---require('copilot_cmp').setup();
-
--- Safely load treesitter configuration
-local status_ok, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
-if status_ok then
-    treesitter_configs.setup {
-        ensure_installed = { 'bash', 'dockerfile', 'go', 'html', 'javascript', 'lua', 'markdown', 'markdown_inline',
-            'python', 'regex', 'ruby', 'rust', 'sql', 'typescript', 'vim', 'yaml' },
-        -- ensure_installed = 'all',
-        highlight = {
-            enable = true, -- false will disable the whole extension
-            disable = {}, -- list of language that will be disabled
-            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-            -- Using this option may slow down your editor, and you may see some duplicate highlights.
-            -- Instead of true it can also be a list of languages
-            additional_vim_regex_highlighting = false,
-        },
+-- nvim-treesitter (main-branch rewrite: highlighting is provided by Neovim core)
+local ts_ok, ts = pcall(require, 'nvim-treesitter')
+if ts_ok then
+    local ensure = {
+        'bash', 'dockerfile', 'go', 'html', 'javascript', 'lua', 'markdown',
+        'markdown_inline', 'python', 'regex', 'ruby', 'rust', 'sql',
+        'typescript', 'vim', 'yaml',
     }
-else
-    vim.notify('nvim-treesitter.configs not found. Run :PlugInstall to install plugins.', vim.log.levels.WARN)
-end
-
--- Configure custom Perl parser
-local status_ok_parsers, parsers = pcall(require, 'nvim-treesitter.parsers')
-if status_ok_parsers and parsers.get_parser_configs then
-    local parser_config = parsers.get_parser_configs()
-    if parser_config then
-        parser_config.perl = {
-            install_info = {
-                url = 'https://github.com/tree-sitter-perl/tree-sitter-perl',
-                revision = 'release',
-                files = { 'src/parser.c', 'src/scanner.c' },
-            },
-            maintainers = { '@leonerd' },
-            filetype = 'perl',
-        }
+    local installed = {}
+    for _, lang in ipairs(ts.get_installed()) do
+        installed[lang] = true
     end
+    local missing = vim.tbl_filter(function(lang) return not installed[lang] end, ensure)
+    if #missing > 0 then
+        ts.install(missing)
+    end
+
+    -- Enable treesitter highlighting per buffer for any installed parser.
+    vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('treesitter_highlight', {}),
+        callback = function(ev)
+            local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
+            local ok, added = pcall(vim.treesitter.language.add, lang)
+            if ok and added then
+                vim.treesitter.start(ev.buf, lang)
+            end
+        end,
+    })
+else
+    vim.notify('nvim-treesitter not found. Run :PlugInstall to install plugins.', vim.log.levels.WARN)
 end
 
 vim.opt.termguicolors = true
@@ -103,7 +66,6 @@ cmp.setup({
                 vsnip = 'vsnip',
                 nvim_lua = 'lua',
                 nvim_lsp_signature_help = 'LSP Signature',
-                Copilot = "",
             }
 
             if entry.source.name == 'nvim_lsp' then
@@ -149,7 +111,6 @@ cmp.setup({
         { name = 'nvim_lua', priority = 9 },
         { name = 'nvim_lsp', priority = 9 },
         { name = 'luasnip',  priority = 8 },
-        --{ name = 'copilot',  group_index = 2 },
     }),
     window = {
         -- completion = cmp.config.window.bordered(),
@@ -249,7 +210,6 @@ require("mason-lspconfig").setup {
         "bashls",
         --"docker_compose_language_service",
         "lua_ls",
-        --"perlnavigator",  -- Installed globally via npm
         --"rust_analyzer",
         "ts_ls",
         "yamlls",
@@ -261,28 +221,6 @@ require("lsp-format").setup {}
 local lspconfig = require('lspconfig')
 lspconfig.bashls.setup {}
 --lspconfig.docker_compose_language_service.setup {}
---lspconfig.lua_ls.setup {
-    --settings = {
-        --Lua = {
-            --runtime = {
-                ---- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                --version = 'LuaJIT',
-            --},
-            --diagnostics = {
-                ---- Get the language server to recognize the `vim` global
-                --globals = { 'hs', 'vim' },
-            --},
-            --workspace = {
-                ---- Make the server aware of Neovim runtime files
-                --library = vim.api.nvim_get_runtime_file("", true),
-            --},
-            ---- Do not send telemetry data containing a randomized but unique identifier
-            --telemetry = {
-                --enable = false,
-            --},
-        --},
-    --},
---}
 lspconfig.yamlls.setup {}
 
 local navbuddy = require("nvim-navbuddy")
@@ -292,53 +230,6 @@ navbuddy.setup {
         preference = nil,
     },
 }
-
--- After setting up mason-lspconfig you may set up servers via lspconfig
--- See server/src/server.ts in PerlNavigator for a list of available settings
-lspconfig.perlnavigator.setup {
-    -- capabilities = capabilities,
-    settings = {
-        perlnavigator = {
-            enableWarnings = true,
-            -- perltidyProfile = '',
-            -- perlcriticProfile = '',
-            includePaths = { 'lib', 'dev/lib', 't/lib' },
-            perlcriticEnabled = false,
-            perlimportsLintEnabled = true,
-            perlimportsTidyEnabled = true,
-            perlPath = 'perl',
-        }
-    },
-    on_new_config = function(new_config, new_root)
-        local m = string.match(new_root, '^(.teamcity)')
-        if m then
-            new_config.settings.perlnavigator.perlPath = 'mm-perl'
-            new_config.settings.perlnavigator.perlcriticProfile = table.concat({ m, 'mm_website/.perlcriticrc' }, '/')
-            new_config.settings.perlnavigator.perltidyProfile = table.concat({ m, 'mm_website/.perltidyallrc' }, '/')
-        end
-    end,
-}
-
---lspconfig.rust_analyzer.setup({
-    --settings = {
-        --["rust-analyzer"] = {
-            --imports = {
-                --granularity = {
-                    --group = "module",
-                --},
-                --prefix = "self",
-            --},
-            --cargo = {
-                --buildScripts = {
-                    --enable = true,
-                --},
-            --},
-            --procMacro = {
-                --enable = true
-            --},
-        --}
-    --}
---})
 
 lspconfig.ts_ls.setup({})
 
@@ -356,10 +247,6 @@ lspconfig.pylsp.setup {
 }
 
 lspconfig.lua_ls.setup {
-  on_attach = function()
-    on_attach()
-    vim.cmd [[autocmd BufWritePre <buffer> lua require'stylua-nvim'.format_file()]]
-  end,
   settings = {
     Lua = {
       runtime = {
@@ -381,7 +268,6 @@ lspconfig.lua_ls.setup {
 }
 
 wildchar = "<tab>"
--- require("lspconfig").rust_analyzer.setup {}
 
 require("noice").setup({
     lsp = {
@@ -426,27 +312,6 @@ require('glow').setup()
 
 require('trouble').setup()
 
---require('hlchunk').setup({
-    --indent = {
-        --chars = { "│", "¦", "┆", "┊", }, -- more code can be found in https://unicodeplus.com/
-        --style = { "#F1f1f1" },
-    --},
-    --blank = {
-        --enable = false,
-    --},
-    --chunk = {
-      --chars = {
-          --horizontal_line = "─",
-          --vertical_line = "│",
-          --left_top = "┌",
-          --left_bottom = "└",
-          --right_arrow = "─",
-      --},
-      --use_treesitter = true,
-    --style = "#00ffff",
-    --},
---})
-
 -- folding
 -- zR - open all folds
 -- zM - close all folds
@@ -478,7 +343,6 @@ wk.add({
     { "<leader>gs", desc = "split the object under cursor" },
     { "<leader>gt", desc = "toggle gutter" },
     { "<leader>lh", "<cmd>DisableHL<cr>", desc = "Disable HL" },
-    { "<leader>ll", desc = "hlchunk" },
     { "<leader>td", desc = "Trouble document diagnostics" },
     { "<leader>tw", desc = "Trouble workspace diagnostics" },
   })
