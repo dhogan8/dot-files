@@ -71,6 +71,7 @@ alias nv='nvim'
 alias cdr='cd $(git root)'
 alias mmdev='devpod ssh mmwebsite -- -L 8443:localhost:8443 -L 8080:localhost:8080 -N'
 alias mmps='sudo service postgresql start'
+alias wm="workmux"
 
 ptest() (
   npm run test "$1" -- --headed --project=chromium "${@/.ts/.js}"
