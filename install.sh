@@ -89,6 +89,7 @@ fi
 ./installer/claude.sh
 ./installer/workmux.sh
 ./configure/git.sh
+./configure/git-hooks.sh
 
 # --- Set up tools that depend on the installers above ---
 
