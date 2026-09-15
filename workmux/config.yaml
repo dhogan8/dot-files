@@ -1,57 +1,42 @@
-# workmux global configuration
-# Symlinked to ~/.config/workmux/config.yaml by install.sh.
-# This is the machine-wide default for every repo (the "tmux.conf" of workmux).
-# Per-project overrides live in a `.workmux.yaml` at each repo root (`workmux init`).
-# Full option list: `workmux config reference`
+# workmux global config — symlinked to ~/.config/workmux/config.yaml by install.sh.
+# Machine-wide defaults; per-repo overrides go in each repo's .workmux.yaml.
+# Full reference: `workmux config reference`
 
-# Use Nerd Font glyphs for status icons in the dashboard/sidebar.
+# Nerd Font glyphs in the dashboard/sidebar.
 nerdfont: true
 
-#-------------------------------------------------------------------------------
-# Common options (uncomment to override defaults)
-#-------------------------------------------------------------------------------
+# Dashboard color scheme (cycle live with shift+T).
+theme: slate-garden
 
-# Dashboard color scheme. Press shift+T in the dashboard to preview others.
-# Options: default, emberforge, glacier-signal, obsidian-pop, slate-garden,
-#          phosphor-arcade, lasergrid, mossfire, night-sorbet, graphite-code,
-#          festival-circuit, teal-drift
-# theme: default
+# Agent for the <agent> pane placeholder: default model + xhigh effort.
+agent: "claude --effort xhigh"
 
-# Agent command for the '<agent>' placeholder in pane layouts. Default: claude
-# agent: claude
+# Worktrees as windows in the current session (vs. session-per-worktree).
+mode: window
 
-# tmux layout mode:
-#   window  (default) - each worktree is a window in the current session
-#   session           - each worktree gets its own tmux session
-# mode: window
+# Default `workmux merge` strategy (override per-merge with --merge/--squash).
+merge_strategy: rebase
 
-# Default merge strategy for `workmux merge`. Options: merge (default), rebase, squash
-# CLI flags (--rebase, --squash) always override this.
-# merge_strategy: rebase
+# Centralize worktrees under ~/.workmux/<project>/ instead of a repo sibling.
+worktree_dir: "~/.workmux/{project}"
 
-# Where worktrees are created. Supports `~`, and `{project}` for the repo dir name.
-# Default: sibling directory '<project>__worktrees'.
-# worktree_dir: ~/.workmux/{project}
+# Name worktrees/windows by branch basename (part after the last '/').
+worktree_naming: basename
 
-# Derive worktree/window names from the branch.
-#   full     (default) - keep the whole branch name
-#   basename           - part after the last '/'
-# worktree_naming: basename
+# Populate gitignored files into each new worktree (missing sources skipped).
+files:
+  copy:
+    - .env
+    - .env.local
+  symlink:
+    - node_modules
 
-# Files applied to every new worktree (great for shared caches / secrets).
-# `copy` gives each worktree its own copy; `symlink` shares one on disk.
-# files:
-#   copy:
-#     - .env.local
-#   symlink:
-#     - node_modules
+# Larger live-agent preview in the dashboard (% of pane, 10-90).
+dashboard:
+  preview_size: 80
 
-# Commands run in a new worktree before its tmux window opens (short tasks only).
-# A project .workmux.yaml can inherit these with the "<global>" placeholder.
-# post_create:
+# Lifecycle hooks — set these per-repo in .workmux.yaml, not globally:
+# post_create:   # runs in a new worktree before its window opens (blocks)
 #   - mise install
-
-# Commands run before `workmux merge`; a non-zero exit aborts the merge.
-# post_create/pre_merge/pre_remove are usually better set per-project.
-# pre_merge:
-#   - just test
+# pre_merge:     # runs before `workmux merge`; non-zero exit aborts
+#   - npm test
