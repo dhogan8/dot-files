@@ -32,8 +32,11 @@ files:
     - node_modules
 
 # Larger live-agent preview in the dashboard (% of pane, 10-90).
+# Column lists omit `time` and `age` to drop the elapsed-time counters.
 dashboard:
   preview_size: 80
+  agent_columns: [number, project, worktree, git, pr, status, title]
+  worktree_columns: [number, project, worktree, git, pr, mux, agent]
 
 # Lifecycle hooks — set these per-repo in .workmux.yaml, not globally:
 # post_create:   # runs in a new worktree before its window opens (blocks)
