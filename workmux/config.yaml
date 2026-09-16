@@ -17,8 +17,8 @@ mode: window
 # Default `workmux merge` strategy (override per-merge with --merge/--squash).
 merge_strategy: rebase
 
-# Centralize worktrees under ~/.workmux/<project>/ instead of a repo sibling.
-worktree_dir: "~/.workmux/{project}"
+# Default sibling layout <project>__worktrees. A centralized worktree_dir
+# (e.g. "~/.workmux/{project}") makes the dashboard mislabel the project.
 
 # Name worktrees/windows by branch basename (part after the last '/').
 worktree_naming: basename
