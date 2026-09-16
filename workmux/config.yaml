@@ -37,6 +37,7 @@ dashboard:
   preview_size: 80
   agent_columns: [number, project, worktree, git, pr, status, title]
   worktree_columns: [number, project, worktree, git, pr, mux, agent]
+  close_on_jump: false
 
 # Lifecycle hooks — set these per-repo in .workmux.yaml, not globally:
 # post_create:   # runs in a new worktree before its window opens (blocks)
