@@ -118,6 +118,11 @@ _mm_relink_ssh_agent() {
                 break
             fi
         done
+        if ! SSH_AUTH_SOCK="$stable" ssh-add -l >/dev/null 2>&1 \
+            && command -v launchctl >/dev/null; then
+            sock=$(launchctl getenv SSH_AUTH_SOCK)
+            [ -S "$sock" ] && ln -sf "$sock" "$stable"
+        fi
     fi
     export SSH_AUTH_SOCK="$stable"
 }
