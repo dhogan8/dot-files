@@ -6,6 +6,8 @@ return {
     "JetBrainsMono Nerd Font",
 }),
   allow_square_glyphs_to_overflow_width = "WhenFollowedBySpace",
+  -- Match tmux, which draws emoji + VS16 (e.g. ⚠️) 2 cells wide.
+  unicode_version = 14,
   color_scheme = "nord",
 
   colors = {
