@@ -233,11 +233,12 @@ alias set_linear='set_token LINEAR_TOKEN'
 # prune keeps anything used in the last 4h.
 free-disk() {
     echo "Free before: $(df -h --output=avail / | tail -1 | tr -d ' ')"
+    # A full disk puts Postgres in recovery mode, so free space before the prune.
+    go clean -cache -testcache -fuzzcache -modcache 2>/dev/null
     # Fixture DBs live on the shared cluster; run from any repo.
     local repo
     repo=$(git -C "$PWD" rev-parse --show-toplevel 2>/dev/null) || repo=/workspaces/mmwebsite
     (cd "$repo" && go run ./go/pg/prune-test-databases 2>/dev/null)
-    go clean -cache -testcache -fuzzcache -modcache 2>/dev/null
     command -v golangci-lint >/dev/null && golangci-lint cache clean 2>/dev/null
     command -v pnpm >/dev/null && pnpm store prune >/dev/null 2>&1
     # Sweep stale /tmp by age (safe: won't touch the current session's fresh files).
