@@ -241,6 +241,9 @@ free-disk() {
     (cd "$repo" && go run ./go/pg/prune-test-databases 2>/dev/null)
     command -v golangci-lint >/dev/null && golangci-lint cache clean 2>/dev/null
     command -v pnpm >/dev/null && pnpm store prune >/dev/null 2>&1
+    command -v npm >/dev/null && npm cache clean --force >/dev/null 2>&1
+    # Keeps every version a tracked mise.toml still pins, including other worktrees'.
+    command -v mise >/dev/null && mise prune --yes >/dev/null 2>&1
     # Sweep stale /tmp by age (safe: won't touch the current session's fresh files).
     find /tmp -type f -atime +1 -delete 2>/dev/null
     echo "Free after:  $(df -h --output=avail / | tail -1 | tr -d ' ')"
