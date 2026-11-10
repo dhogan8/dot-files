@@ -14,6 +14,10 @@ agent: "claude --effort xhigh"
 # Worktrees as windows in the current session (vs. session-per-worktree).
 mode: window
 
+# One plain shell pane per window; no agent starts on `add` or `open`.
+panes:
+  - focus: true
+
 # Default `workmux merge` strategy (override per-merge with --merge/--squash).
 merge_strategy: rebase
 
