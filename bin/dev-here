@@ -1,0 +1,25 @@
+#!/bin/bash
+# Usage: dev-here [DIR]
+# Restart dev-website in the worktree that contains DIR, in one tmux window.
+set -eu -o pipefail
+
+root=$(git -C "${1:-$PWD}" rev-parse --show-toplevel)
+if [[ ! -x $root/dev/bin/web/dev-website ]]; then
+    echo "dev-here: $root has no dev/bin/web/dev-website" >&2
+    exit 1
+fi
+
+# exec keeps dev-website the pane's process group leader, so Ctrl-C reaches it.
+# mise exec uses this worktree's tool versions, not the tmux server's PATH.
+cmd="exec mise exec -- dev/bin/web/dev-website -f"
+
+win=$(tmux list-windows -a -F '#{window_id} #{@dev_website}' | awk '$2 == 1 { print $1 }')
+if [[ -n $win ]]; then
+    tmux respawn-pane -k -t "$win" -c "$root" "$cmd"
+else
+    win=$(tmux new-window -d -P -F '#{window_id}' -c "$root" "$cmd")
+    tmux set-option -w -t "$win" @dev_website 1
+    tmux set-option -w -t "$win" remain-on-exit on
+fi
+tmux rename-window -t "$win" "dev:${root##*/}"
+tmux display-message "dev-website: ${root##*/}"

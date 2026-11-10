@@ -39,6 +39,9 @@ ln -sf $PREFIX/workmux/config.yaml "$WORKMUX/config.yaml"
 
 mkdir -p "$HOME/local/bin"
 
+mkdir -p "$HOME/.local/bin"
+ln -sf "$PREFIX/bin/dev-here" "$HOME/.local/bin/dev-here"
+
 mkdir -p "$HOME/.vimtmp"
 
 nvim_conf_dir="$HOME/.config/nvim"
