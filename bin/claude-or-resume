@@ -1,0 +1,11 @@
+#!/bin/bash
+# Open the Claude session picker if this directory has sessions, else start a new one.
+set -eu -o pipefail
+
+# Claude Code names each project folder after its path, with every
+# non-alphanumeric character replaced by "-".
+sessions="$HOME/.claude/projects/$(pwd | sed 's/[^A-Za-z0-9]/-/g')"
+if compgen -G "$sessions/*.jsonl" >/dev/null; then
+    exec claude --effort xhigh --resume
+fi
+exec claude --effort xhigh

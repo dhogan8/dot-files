@@ -41,6 +41,7 @@ mkdir -p "$HOME/local/bin"
 
 mkdir -p "$HOME/.local/bin"
 ln -sf "$PREFIX/bin/dev-here" "$HOME/.local/bin/dev-here"
+ln -sf "$PREFIX/bin/claude-or-resume" "$HOME/.local/bin/claude-or-resume"
 
 mkdir -p "$HOME/.vimtmp"
 
