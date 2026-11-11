@@ -6,7 +6,7 @@
 local ts_ok, ts = pcall(require, 'nvim-treesitter')
 if ts_ok then
     local ensure = {
-        'bash', 'dockerfile', 'go', 'html', 'javascript', 'lua', 'markdown',
+        'bash', 'dockerfile', 'go', 'gotmpl', 'html', 'javascript', 'lua', 'markdown',
         'markdown_inline', 'python', 'regex', 'ruby', 'rust', 'sql',
         'typescript', 'vim', 'yaml',
     }

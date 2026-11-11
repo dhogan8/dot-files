@@ -152,7 +152,7 @@ let g:ale_go_gci_options = '-s standard -s default -s "prefix(github.maxmind.com
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'go': ['gci', 'goimports', 'gofmt'],
-  \   'gohtml': ['prettier'],
+  \   'gotmpl': ['prettier'],
   \   'java': ['google_java_format'],
   \   'javascript': ['eslint', 'prettier_eslint'],
   \   'javascriptreact': ['eslint', 'prettier'],
@@ -173,7 +173,7 @@ let g:ale_fixers = {
 let g:ale_linters = {
   \   'ansible' : ['ansible-lint'],
   \   'go': ['gofmt', 'golangci-lint', 'gopls', 'revive'],
-  \   'gohtml': ['prettier'],
+  \   'gotmpl': ['prettier'],
   \   'dockerfile': ['hadolint'],
   \   'html': ['alex', 'fecs', 'htmlhint', 'stylelint', 'tidy',],
   \   'javascript': ['eslint', 'tsserver'],
@@ -254,7 +254,7 @@ augroup filetypes
   autocmd BufRead,BufNewFile *.scss         set filetype=scss
   autocmd BufRead,BufNewFile bash_profile   set filetype=sh
   autocmd BufRead,BufNewFile *.tx           set filetype=html
-  autocmd BufRead,BufNewFile *.gohtml      set filetype=html
+  autocmd BufRead,BufNewFile *.gohtml       execute 'set filetype=' . (has('nvim') ? 'gotmpl' : 'html')
 augroup END
 
 "dictionary sort unique
