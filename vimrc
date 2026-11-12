@@ -170,10 +170,16 @@ let g:ale_fixers = {
   \   'yaml': ['prettier'],
   \}
 
+" ALE runs prettier in the file's directory, so pass the go-template config by full path.
+augroup ale_gotmpl
+  autocmd!
+  autocmd FileType gotmpl let b:ale_javascript_prettier_options =
+    \ '--config ' . fnamemodify(findfile('.prettierrc.non-js.cjs', expand('<afile>:p:h') . ';'), ':p')
+augroup END
+
 let g:ale_linters = {
   \   'ansible' : ['ansible-lint'],
   \   'go': ['gofmt', 'golangci-lint', 'gopls', 'revive'],
-  \   'gotmpl': ['prettier'],
   \   'dockerfile': ['hadolint'],
   \   'html': ['alex', 'fecs', 'htmlhint', 'stylelint', 'tidy',],
   \   'javascript': ['eslint', 'tsserver'],
