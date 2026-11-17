@@ -58,6 +58,13 @@ fi
 # --- Install system packages ---
 
 if [ "$(uname)" == "Darwin" ]; then
+  # Homebrew needs the Command Line Tools. xcode-select --install only opens
+  # an installer dialog, so stop and let the user run this script again.
+  if ! xcode-select -p >/dev/null 2>&1; then
+    xcode-select --install
+    echo "Install the Command Line Tools from the dialog, then run install.sh again." >&2
+    exit 1
+  fi
   brew upgrade
   brew install go
   brew install jandedobbeleer/oh-my-posh/oh-my-posh
@@ -74,7 +81,6 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install openssl
   brew install hashicorp/tap/hashicorp-vagrant
   brew install git-lfs
-  ./installer/xcode.sh
 else
   sudo apt-get update
   sudo apt install -y unzip
