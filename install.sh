@@ -75,6 +75,7 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install tree-sitter-cli  # required by nvim-treesitter (main branch) to compile parsers
   brew install tmux
   brew install bat
+  brew install ripgrep
   brew install --cask font-jetbrains-mono-nerd-font
   brew install bash
   brew install bash-completion
