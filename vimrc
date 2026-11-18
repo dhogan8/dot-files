@@ -202,6 +202,8 @@ set number
 set regexpengine=0
 syntax on
 colorscheme nord
+highlight Normal guibg=NONE
+highlight SignColumn guibg=NONE
 set updatetime=100
 
 set smartindent
