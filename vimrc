@@ -204,6 +204,12 @@ syntax on
 colorscheme nord
 highlight Normal guibg=NONE
 highlight SignColumn guibg=NONE
+" nord-vim does not set the floating window groups. Match the tmux status bar.
+highlight NormalFloat guibg=#343D46
+highlight FloatBorder guibg=#343D46
+" fzf-lua links its windows to Normal, and its other groups link to these two.
+highlight link FzfLuaNormal NormalFloat
+highlight link FzfLuaBorder FloatBorder
 set updatetime=100
 
 set smartindent
@@ -214,6 +220,8 @@ set shiftwidth=2
 let g:mapleader = ','
 nnoremap <leader>f : <C-u>FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+" The FZF popup uses Normal. Match the other floating windows.
+let g:fzf_colors = {'bg': ['bg', 'NormalFloat']}
 
 " vim-mustache-handlebars
 let g:mustache_abbreviations = 1
