@@ -142,11 +142,12 @@ tmux kill-session -t CI 2>/dev/null || true
 tmux new-session -d -s CI
 tmux ls
 
-tmux source ~/.tmux.conf
-
 ~/.tmux/plugins/tpm/bin/install_plugins
 ~/.tmux/plugins/tpm/bin/update_plugins all
 ~/.tmux/plugins/tpm/bin/clean_plugins
+
+# Reload after the plugin steps, so plugins installed in this run load.
+tmux source ~/.tmux.conf
 
 tmux kill-session -t CI
 

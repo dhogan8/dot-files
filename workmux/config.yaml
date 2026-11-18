@@ -4,6 +4,9 @@
 
 # Nerd Font glyphs in the dashboard/sidebar.
 nerdfont: true
+# tmux.conf puts the status icon inside each window tab. workmux would add it
+# after the tab's closing arrow.
+status_format: false
 
 # Dashboard color scheme (cycle live with shift+T).
 theme: slate-garden
