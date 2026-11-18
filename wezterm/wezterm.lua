@@ -11,6 +11,7 @@ return {
   color_scheme = "nord",
 
   colors = {
+    background = "#25303a",
     tab_bar = {
       active_tab = {
         bg_color = "#78c1d2",
