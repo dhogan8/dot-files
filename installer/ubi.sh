@@ -42,18 +42,11 @@ maybe_install houseabsolute/precious
 maybe_install jqlang/jq
 maybe_install junegunn/fzf
 
-if is os name eq darwin; then
-	if is cli version bat ne 0.24.0 || true; then
-		ubi --in "$in" \
-			--url https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-apple-darwin.tar.gz
-	fi
-else
-	ubi --project sharkdp/bat --in "$in"
-fi
-
-# tree-sitter CLI: macOS installs it via brew (tree-sitter-cli). On Linux, fetch the
-# release binary so nvim-treesitter (main branch) can compile parsers.
+# bat and the tree-sitter CLI: macOS installs them via brew, which has native
+# Apple Silicon builds. On Linux, fetch the release binaries. nvim-treesitter
+# (main branch) needs the tree-sitter CLI to compile parsers.
 if ! is os name eq darwin; then
+	ubi --project sharkdp/bat --in "$in"
 	maybe_install tree-sitter/tree-sitter
 fi
 
